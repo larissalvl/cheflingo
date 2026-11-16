@@ -42,6 +42,8 @@ Jogo educativo para crianças de 8 a 10 anos, feito na Godot 4.7.2 (GDScript), c
 
 ## Cronograma (marque [x] ao concluir e atualize este arquivo ao fim de cada dia; avise se estivermos atrasadas)
 - [ ] D1 Seg 16/11 — Projeto Godot criado, InputManager (teclado), 2 chefs se movendo na tela. Física: ler 1 joystick no ESP32 pelo Serial.
+  - [x] Software: projeto, InputManager (teclado + `set_remote_state` pronto para o hardware), 2 chefs placeholder. Testado headless.
+  - [ ] Física: gravar `firmware/joystick_serial` e conferir os valores no Serial Monitor (pendente, Larissa).
 - [ ] D2 Ter 17/11 — Cozinha base: colisões, estações placeholder, pegar/soltar item. Física: firmware calibrado do J1 + envio UDP.
 - [ ] D3 Qua 18/11 — Porções e frações: caixas, tigela que soma frações, receita 1 funcionando.
 - [ ] D4 Qui 19/11 — Clientes, pedidos em inglês, paciência, entrega, pontuação, 3 receitas. Física: J2 + dois ESP32 controlando os dois chefs. MARCO: hardware integrado.
