@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cozinha Maluca"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/kitchen.tscn"
 config/features=PackedStringArray("4.7")
 
 [autoload]
@@ -23,7 +23,6 @@ InputManager="*res://scripts/input_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
 
 [rendering]
 

@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/kitchen.gd" id="1_kitchen"]
+[ext_resource type="PackedScene" path="res://scenes/chef.tscn" id="2_chef"]
+[ext_resource type="PackedScene" path="res://scenes/stations/counter.tscn" id="3_counter"]
+[ext_resource type="PackedScene" path="res://scenes/stations/ingredient_box.tscn" id="4_box"]
+[ext_resource type="PackedScene" path="res://scenes/stations/bowl.tscn" id="5_bowl"]
+[ext_resource type="PackedScene" path="res://scenes/stations/oven.tscn" id="6_oven"]
+[ext_resource type="PackedScene" path="res://scenes/stations/delivery.tscn" id="7_delivery"]
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_h"]
+size = Vector2(1280, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_v"]
+size = Vector2(32, 720)
+
+[node name="Kitchen" type="Node2D"]
+script = ExtResource("1_kitchen")
+
+[node name="Floor" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.93, 0.87, 0.75, 1)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="TopVisual" type="ColorRect" parent="Walls"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 32.0
+mouse_filter = 2
+color = Color(0.36, 0.25, 0.2, 1)
+
+[node name="BottomVisual" type="ColorRect" parent="Walls"]
+offset_left = 0.0
+offset_top = 688.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.36, 0.25, 0.2, 1)
+
+[node name="LeftVisual" type="ColorRect" parent="Walls"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 32.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.36, 0.25, 0.2, 1)
+
+[node name="RightVisual" type="ColorRect" parent="Walls"]
+offset_left = 1248.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.36, 0.25, 0.2, 1)
+
+[node name="TopShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2(640, 16)
+shape = SubResource("Shape_wall_h")
+
+[node name="BottomShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2(640, 704)
+shape = SubResource("Shape_wall_h")
+
+[node name="LeftShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2(16, 360)
+shape = SubResource("Shape_wall_v")
+
+[node name="RightShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1264, 360)
+shape = SubResource("Shape_wall_v")
+
+[node name="Stations" type="Node2D" parent="."]
+
+[node name="BoxFlour" parent="Stations" instance=ExtResource("4_box")]
+position = Vector2(192, 64)
+ingredient = "FLOUR"
+
+[node name="BoxEggs" parent="Stations" instance=ExtResource("4_box")]
+position = Vector2(320, 64)
+ingredient = "EGGS"
+
+[node name="BoxSugar" parent="Stations" instance=ExtResource("4_box")]
+position = Vector2(448, 64)
+ingredient = "SUGAR"
+
+[node name="CounterTop1" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(576, 64)
+
+[node name="CounterTop2" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(640, 64)
+
+[node name="Bowl" parent="Stations" instance=ExtResource("5_bowl")]
+position = Vector2(768, 64)
+
+[node name="CounterTop3" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(896, 64)
+
+[node name="Oven" parent="Stations" instance=ExtResource("6_oven")]
+position = Vector2(1024, 64)
+
+[node name="Island1" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(512, 384)
+
+[node name="Island2" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(576, 384)
+
+[node name="Island3" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(640, 384)
+
+[node name="Island4" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(704, 384)
+
+[node name="Delivery" parent="Stations" instance=ExtResource("7_delivery")]
+position = Vector2(1216, 384)
+
+[node name="CounterBottom1" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(256, 656)
+
+[node name="CounterBottom2" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(320, 656)
+
+[node name="CounterBottom3" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(960, 656)
+
+[node name="CounterBottom4" parent="Stations" instance=ExtResource("3_counter")]
+position = Vector2(1024, 656)
+
+[node name="Chef1" parent="." instance=ExtResource("2_chef")]
+position = Vector2(384, 528)
+player_id = 1
+color = Color(0.9, 0.3, 0.3, 1)
+
+[node name="Chef2" parent="." instance=ExtResource("2_chef")]
+position = Vector2(896, 528)
+player_id = 2
+color = Color(0.25, 0.45, 0.9, 1)
+
+[node name="Hud" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 6.0
+offset_right = 1240.0
+offset_bottom = 28.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "J1: WASD + E   |   J2: setas + Enter"

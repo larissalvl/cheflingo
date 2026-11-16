@@ -25,3 +25,6 @@ __pycache__/
 
 # Firmware (PlatformIO, se usado)
 .pio/
+
+# Segredos do firmware (Wi-Fi)
+firmware/**/config.h
