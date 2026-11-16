@@ -1,0 +1,28 @@
+# Godot 4
+.godot/
+*.translation
+.import/
+
+# Exports e builds
+export/
+build/
+builds/
+export_presets.cfg
+*.exe
+*.pck
+*.zip
+*.apk
+*.x86_64
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Python (tools/)
+__pycache__/
+*.pyc
+
+# Firmware (PlatformIO, se usado)
+.pio/
