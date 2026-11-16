@@ -7,7 +7,6 @@
 export/
 build/
 builds/
-export_presets.cfg
 *.exe
 *.pck
 *.zip
