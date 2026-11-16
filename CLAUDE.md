@@ -38,12 +38,12 @@ Jogo educativo para crianças de 8 a 10 anos, feito na Godot 4.7.2 (GDScript), c
 - Cada ESP32 tem ID fixo (J1 ou J2) e envia o estado por UDP via Wi-Fi para o PC, 30 a 60 vezes por segundo.
 - Formato do pacote (texto): `J1,x,y,sw` (ex.: `J1,0.52,-0.10,1`), x e y entre -1 e 1, sw=1 quando pressionado. Porta UDP: 4210.
 - Plano B: Serial por USB + script Python em tools/ que repassa para UDP local, sem mudar o código da Godot.
+- Lições do hardware: o Wi-Fi funcionou pelo hotspot do celular (rede 2,4 GHz). Se o joystick estiver tocado no boot, a calibração erra e o chef anda sozinho; solução atual: reiniciar o ESP32 com o joystick solto.
 - Avise ANTES de qualquer risco de hardware (Wi-Fi bloqueado, joystick com ruído, mau contato) e já traga o plano B.
 
 ## Cronograma (marque [x] ao concluir e atualize este arquivo ao fim de cada dia; avise se estivermos atrasadas)
 - [x] D1 Seg 16/11 — Projeto Godot criado, InputManager (teclado), 2 chefs se movendo na tela. Física: ler 1 joystick no ESP32 pelo Serial. (Concluído: J1 lido no Serial pela Larissa; pinos VRx=34, VRy=35, SW=32.)
-- [ ] D2 Ter 17/11 — Cozinha base: colisões, estações placeholder, pegar/soltar item. Física: firmware calibrado do J1 + envio UDP.
-  - Software pronto e testado headless (28 checagens) + firmware `firmware/j1` compilando. Aguardando a Larissa confirmar no Godot e com o J1 real.
+- [x] D2 Ter 17/11 — Cozinha base: colisões, estações placeholder, pegar/soltar item. Física: firmware calibrado do J1 + envio UDP. (Concluído: testado no Godot e com o J1 real via hotspot do celular; nenhum eixo invertido.)
 - [ ] D3 Qua 18/11 — Porções e frações: caixas, tigela que soma frações, receita 1 funcionando.
 - [ ] D4 Qui 19/11 — Clientes, pedidos em inglês, paciência, entrega, pontuação, 3 receitas. Física: J2 + dois ESP32 controlando os dois chefs. MARCO: hardware integrado.
 - [ ] D5 Sex 20/11 — 5 receitas, rodadas, dificuldade progressiva, feedback de erro com dica em português, tela inicial e final. Primeira leva de arte da colega.
