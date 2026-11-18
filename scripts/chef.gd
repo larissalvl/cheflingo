@@ -1,6 +1,6 @@
 class_name Chef
 extends CharacterBody2D
-## Chef controlado por um jogador. Placeholder desenhado em código até a arte chegar.
+## Chef controlado por um jogador. J1 = raposa, J2 = esquilo.
 ## Interage só com a estação mais próxima dentro do alcance.
 
 @export var player_id: int = 1
@@ -15,18 +15,22 @@ var held_item: Item = null
 var _stations_in_reach: Array[Station] = []
 var _nearest: Station = null
 
-@onready var _hold_point: Marker2D = $HoldPoint
+## Prefixo das animações: "raposa" ou "esquilo".
+var _skin := "raposa"
 
-func _ready():
-	if player_id == 1:
-		$AnimatedSprite2D.set_animation("raposa")
-	else:
-		$AnimatedSprite2D.set_animation("esquilo")
+@onready var _hold_point: Marker2D = $HoldPoint
+@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+
+func _ready() -> void:
+	_skin = "raposa" if player_id == 1 else "esquilo"
+	_sprite.play(_skin + "_idle")
 
 
 func _physics_process(_delta: float) -> void:
 	velocity = InputManager.get_move(player_id) * speed
 	move_and_slide()
+	_update_animation()
 
 	_update_nearest()
 	if InputManager.is_action_just_pressed(player_id) and _nearest != null:
@@ -89,6 +93,13 @@ func _update_nearest() -> void:
 
 
 # ---------------- visual ----------------
+
+## "andando" enquanto se move; quadro parado quando está quieto (ou travado na parede).
+func _update_animation() -> void:
+	var anim := _skin + ("_walk" if velocity.length() > 1.0 else "_idle")
+	if _sprite.animation != anim:
+		_sprite.play(anim)
+
 
 ## Pulinho para confirmar que a ação funcionou.
 func _pulse() -> void:

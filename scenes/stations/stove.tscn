@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/stations/station.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scripts/stations/stove.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://sprites/fogaoApagado.PNG" id="3_off"]
+[ext_resource type="Texture2D" path="res://sprites/fogaoAceso.PNG" id="4_on"]
+[ext_resource type="Texture2D" path="res://sprites/frigideiraVazia.PNG" id="5_pan"]
+
+[node name="Stove" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+title = "STOVE"
+color = Color(0.25, 0.25, 0.28, 1)
+
+[node name="Visual" parent="." index="0"]
+visible = false
+
+[node name="StoveOff" type="Sprite2D" parent="."]
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("3_off")
+
+[node name="StoveOn" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("4_on")
+
+[node name="Pan" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("5_pan")

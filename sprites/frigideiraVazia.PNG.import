@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b41sgedgiqo88"
-path="res://.godot/imported/fogãoAcesso.PNG-8110f6ca1e6e8ade0f7032013d31e310.ctex"
+uid="uid://bh44yb8cigi40"
+path="res://.godot/imported/frigideiraVazia.PNG-6ac161081a3a49c9114bd8e8defd3cea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/fogãoAcesso.PNG"
-dest_files=["res://.godot/imported/fogãoAcesso.PNG-8110f6ca1e6e8ade0f7032013d31e310.ctex"]
+source_file="res://sprites/frigideiraVazia.PNG"
+dest_files=["res://.godot/imported/frigideiraVazia.PNG-6ac161081a3a49c9114bd8e8defd3cea.ctex"]
 
 [params]
 

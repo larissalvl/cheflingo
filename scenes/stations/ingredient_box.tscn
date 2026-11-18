@@ -5,7 +5,7 @@
 
 [node name="IngredientBox" unique_id=561362972 instance=ExtResource("1_base")]
 script = ExtResource("2_script")
-ingredient = "FLOUR"
+ingredient = "EGG"
 title = "BOX"
 color = Color(0.35, 0.6, 0.35, 1)
 

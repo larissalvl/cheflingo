@@ -1,7 +1,6 @@
 class_name Bowl
 extends Station
 ## Tigela: aceita itens e mostra quantos tem dentro.
-## (No D3 vira a tigela que soma frações.)
 
 var contents: Array[String] = []
 

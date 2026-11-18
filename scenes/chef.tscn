@@ -13,30 +13,40 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_psvbk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_2a8di")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_stm2u")
 }],
-"loop": 1,
-"name": &"esquilo",
+"loop": true,
+"name": &"esquilo_idle",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_d56cy")
+"texture": ExtResource("4_stm2u")
 }, {
+"duration": 1.0,
+"texture": ExtResource("3_2a8di")
+}],
+"loop": true,
+"name": &"esquilo_walk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d56cy")
+}],
+"loop": true,
+"name": &"raposa_idle",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_4ri07")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_oqmwt")
 }],
-"loop": 1,
-"name": &"raposa",
-"speed": 5.0
+"loop": true,
+"name": &"raposa_walk",
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chef"]
@@ -49,12 +59,13 @@ motion_mode = 1
 script = ExtResource("1_chef")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790664610]
+position = Vector2(-22, 0)
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_1slas")
-animation = &"esquilo"
+animation = &"esquilo_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121842226]
 shape = SubResource("CircleShape2D_chef")
 
 [node name="HoldPoint" type="Marker2D" parent="." unique_id=277128081]
-position = Vector2(20, -185)
+position = Vector2(0, -185)

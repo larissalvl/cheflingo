@@ -7,12 +7,13 @@ const SIZE := Vector2(46, 26)
 
 ## Cor de cada ingrediente.
 const COLORS := {
-	"FLOUR": Color(0.97, 0.95, 0.88),
-	"EGGS": Color(1.0, 0.82, 0.3),
-	"SUGAR": Color(0.98, 0.7, 0.85),
+	"EGG": Color(1.0, 0.82, 0.3),
+	"BACON": Color(0.85, 0.35, 0.3),
+	"BEEF PATTY": Color(0.5, 0.3, 0.18),
+	"LETTUCE": Color(0.45, 0.8, 0.35),
 }
 
-var ingredient: String = "FLOUR"
+var ingredient: String = "EGG"
 
 
 static func create(ingredient_name: String) -> Item:
