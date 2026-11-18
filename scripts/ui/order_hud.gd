@@ -101,7 +101,7 @@ func _make_row(id: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 12)
 
-	var tex := Ingredients.texture(id)
+	var tex := Ingredients.icon(id)
 	if tex != null:
 		var icon := TextureRect.new()
 		icon.texture = tex

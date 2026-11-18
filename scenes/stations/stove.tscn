@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/stations/station.tscn" id="1_base"]
 [ext_resource type="Script" path="res://scripts/stations/stove.gd" id="2_script"]
@@ -6,24 +6,47 @@
 [ext_resource type="Texture2D" path="res://sprites/fogaoAceso.PNG" id="4_on"]
 [ext_resource type="Texture2D" path="res://sprites/frigideiraVazia.PNG" id="5_pan"]
 
+[sub_resource type="RectangleShape2D" id="Shape_stove_body"]
+size = Vector2(76, 116)
+
+[sub_resource type="RectangleShape2D" id="Shape_stove_reach"]
+size = Vector2(124, 164)
+
 [node name="Stove" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 title = "STOVE"
 color = Color(0.25, 0.25, 0.28, 1)
+highlight_size = Vector2(76, 116)
 
 [node name="Visual" parent="." index="0"]
 visible = false
 
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("Shape_stove_body")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource("Shape_stove_reach")
+
+[node name="Label" parent="." index="3"]
+offset_top = -62.0
+offset_bottom = -44.0
+
 [node name="StoveOff" type="Sprite2D" parent="."]
-scale = Vector2(0.065, 0.065)
+show_behind_parent = true
+position = Vector2(0, -2.6)
+scale = Vector2(0.0979, 0.1352)
 texture = ExtResource("3_off")
 
 [node name="StoveOn" type="Sprite2D" parent="."]
 visible = false
-scale = Vector2(0.065, 0.065)
+show_behind_parent = true
+position = Vector2(0.1, -1.7)
+scale = Vector2(0.0929, 0.1275)
 texture = ExtResource("4_on")
 
 [node name="Pan" type="Sprite2D" parent="."]
-position = Vector2(0, -6)
-scale = Vector2(0.045, 0.045)
+visible = false
+show_behind_parent = true
+position = Vector2(-1, -26)
+scale = Vector2(0.056, 0.056)
 texture = ExtResource("5_pan")

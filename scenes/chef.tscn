@@ -68,4 +68,4 @@ animation = &"esquilo_idle"
 shape = SubResource("CircleShape2D_chef")
 
 [node name="HoldPoint" type="Marker2D" parent="." unique_id=277128081]
-position = Vector2(0, -185)
+position = Vector2(0, -240)

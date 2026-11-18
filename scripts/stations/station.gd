@@ -10,6 +10,8 @@ const HIGHLIGHT_COLOR := Color(1.0, 0.85, 0.1)
 
 @export var title: String = "STATION"
 @export var color: Color = Color(0.55, 0.4, 0.28)
+## Tamanho do contorno amarelo (estações maiores, como o fogão, aumentam).
+@export var highlight_size: Vector2 = SIZE
 
 ## Chefs que estão com esta estação como "a mais próxima".
 var _highlighted_by: Array[Node] = []
@@ -63,7 +65,7 @@ func is_highlighted() -> bool:
 func _draw() -> void:
 	# Contorno amarelo quando algum chef pode interagir com esta estação.
 	if is_highlighted():
-		draw_rect(Rect2(-SIZE / 2 - Vector2(4, 4), SIZE + Vector2(8, 8)), HIGHLIGHT_COLOR, false, 4.0)
+		draw_rect(Rect2(-highlight_size / 2 - Vector2(4, 4), highlight_size + Vector2(8, 8)), HIGHLIGHT_COLOR, false, 4.0)
 
 
 func _on_body_entered(body: Node) -> void:
