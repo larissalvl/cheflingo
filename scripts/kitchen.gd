@@ -19,7 +19,8 @@ func _update_hud() -> void:
 
 
 # DEBUG: remover antes da entrega
-# F1 = vitória, F2 = game over, F3 = reinicia a partida.
+# F1 = vitória, F2 = game over, F3 = reinicia a partida,
+# 8 = entrega o pedido certo, 9 = entrega um pedido errado.
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
@@ -30,3 +31,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			GameState.lose()
 		KEY_F3:
 			GameState.start_game()
+		KEY_8, KEY_KP_8:
+			OrderManager.submit_dish(OrderManager.current_items.duplicate())
+		KEY_9, KEY_KP_9:
+			OrderManager.submit_dish(_debug_wrong_dish())
+
+
+# DEBUG: remover antes da entrega
+# Pedido atual sem o último item e com um ingrediente a mais (se houver algum fora do pedido).
+func _debug_wrong_dish() -> Array:
+	var dish := OrderManager.current_items.duplicate()
+	dish.pop_back()
+	for id in Ingredients.ids():
+		if id not in OrderManager.current_items:
+			dish.append(id)
+			break
+	return dish

@@ -10,12 +10,17 @@ signal time_up
 enum State { MENU, JOGANDO, VITORIA, GAME_OVER }
 
 const ROUND_SECONDS := 90.0
+## Estrelas pelo tempo restante na vitória: 3 com 45 s ou mais, 2 com 20 s ou mais, senão 1.
+const THREE_STARS_SECONDS := 45.0
+const TWO_STARS_SECONDS := 20.0
 
 var state: State = State.MENU
 ## Tempo restante em segundos (com fração).
 var time_left: float = ROUND_SECONDS
 ## Tempo restante no momento da vitória (para as estrelas, depois).
 var final_time_left: float = 0.0
+## Estrelas ganhas (1 a 3). 0 = ainda não venceu.
+var stars: int = 0
 
 
 func _process(delta: float) -> void:
@@ -32,19 +37,28 @@ func _process(delta: float) -> void:
 
 # ---------------- API pública ----------------
 
-## Zera tudo e começa a partida.
+## Zera tudo, sorteia os pedidos e começa a partida.
 func start_game() -> void:
 	time_left = ROUND_SECONDS
 	final_time_left = 0.0
+	stars = 0
+	OrderManager.start_new_round()
 	_set_state(State.JOGANDO)
 	time_changed.emit(get_seconds_left())
 
 
-## Vitória: guarda o tempo restante. Só vale durante a partida.
+## Vitória: guarda o tempo restante e as estrelas. Só vale durante a partida.
 func win() -> void:
 	if state != State.JOGANDO:
 		return
 	final_time_left = time_left
+	if final_time_left >= THREE_STARS_SECONDS:
+		stars = 3
+	elif final_time_left >= TWO_STARS_SECONDS:
+		stars = 2
+	else:
+		stars = 1
+	print("[GameState] vitória com %.1f s restantes -> %d estrela(s)" % [final_time_left, stars])
 	_set_state(State.VITORIA)
 
 
@@ -59,6 +73,8 @@ func lose() -> void:
 func reset() -> void:
 	time_left = ROUND_SECONDS
 	final_time_left = 0.0
+	stars = 0
+	OrderManager.clear()
 	_set_state(State.MENU)
 	time_changed.emit(get_seconds_left())
 
