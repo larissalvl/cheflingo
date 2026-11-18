@@ -43,13 +43,13 @@ animations = [{
 radius = 24.0
 
 [node name="Chef" type="CharacterBody2D" unique_id=2088147977]
-scale = Vector2(0.09, 0.09)
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_chef")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790664610]
+scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_1slas")
 animation = &"esquilo"
 
@@ -57,4 +57,4 @@ animation = &"esquilo"
 shape = SubResource("CircleShape2D_chef")
 
 [node name="HoldPoint" type="Marker2D" parent="." unique_id=277128081]
-position = Vector2(0, -70)
+position = Vector2(20, -185)
