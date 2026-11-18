@@ -1,18 +1,60 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://daar8jtovocv8"]
 
-[ext_resource type="Script" path="res://scripts/chef.gd" id="1_chef"]
+[ext_resource type="Script" uid="uid://dspqskdga4ivy" path="res://scripts/chef.gd" id="1_chef"]
+[ext_resource type="Texture2D" uid="uid://e11uaeau73vy" path="res://sprites/Players/raposa/raposaIdle.PNG" id="2_d56cy"]
+[ext_resource type="Texture2D" uid="uid://cs45r2de7whna" path="res://sprites/Players/esquilo/esquiloParado.PNG" id="2_psvbk"]
+[ext_resource type="Texture2D" uid="uid://dmntoiiwjfi63" path="res://sprites/Players/esquilo/esquiloAndando2.PNG" id="3_2a8di"]
+[ext_resource type="Texture2D" uid="uid://dwrdtvhq41v8g" path="res://sprites/Players/raposa/raposaAndar1.PNG" id="3_4ri07"]
+[ext_resource type="Texture2D" uid="uid://d1vkx7ubp3p3h" path="res://sprites/Players/raposa/raposaAndar2.PNG" id="4_oqmwt"]
+[ext_resource type="Texture2D" uid="uid://dp0a8c173gegf" path="res://sprites/Players/esquilo/esquiloAndando1.PNG" id="4_stm2u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1slas"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_psvbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2a8di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_stm2u")
+}],
+"loop": 1,
+"name": &"esquilo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d56cy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4ri07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oqmwt")
+}],
+"loop": 1,
+"name": &"raposa",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chef"]
 radius = 24.0
 
-[node name="Chef" type="CharacterBody2D"]
+[node name="Chef" type="CharacterBody2D" unique_id=2088147977]
+scale = Vector2(0.09, 0.09)
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_chef")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790664610]
+sprite_frames = SubResource("SpriteFrames_1slas")
+animation = &"esquilo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121842226]
 shape = SubResource("CircleShape2D_chef")
 
-[node name="HoldPoint" type="Marker2D" parent="."]
+[node name="HoldPoint" type="Marker2D" parent="." unique_id=277128081]
 position = Vector2(0, -70)

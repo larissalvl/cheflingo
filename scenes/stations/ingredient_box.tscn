@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://c1mby23mrlhfv"]
 
 [ext_resource type="PackedScene" path="res://scenes/stations/station.tscn" id="1_base"]
-[ext_resource type="Script" path="res://scripts/stations/ingredient_box.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://ds3ayg43f20bx" path="res://scripts/stations/ingredient_box.gd" id="2_script"]
 
-[node name="IngredientBox" instance=ExtResource("1_base")]
+[node name="IngredientBox" unique_id=561362972 instance=ExtResource("1_base")]
 script = ExtResource("2_script")
+ingredient = "FLOUR"
 title = "BOX"
 color = Color(0.35, 0.6, 0.35, 1)
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+visible = false

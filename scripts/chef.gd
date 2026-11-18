@@ -17,6 +17,12 @@ var _nearest: Station = null
 
 @onready var _hold_point: Marker2D = $HoldPoint
 
+func _ready():
+	if player_id == 1:
+		$AnimatedSprite2D.set_animation("raposa")
+	else:
+		$AnimatedSprite2D.set_animation("esquilo")
+
 
 func _physics_process(_delta: float) -> void:
 	velocity = InputManager.get_move(player_id) * speed
@@ -89,11 +95,3 @@ func _pulse() -> void:
 	var tween := create_tween()
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.06)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.10)
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, RADIUS, color)                              # corpo
-	draw_rect(Rect2(-14, -RADIUS - 16, 28, 18), Color.WHITE)              # chapéu
-	draw_circle(Vector2(0, -RADIUS - 18), 10, Color.WHITE)                # topo do chapéu
-	draw_string(ThemeDB.fallback_font, Vector2(-12, 7), "J%d" % player_id,
-		HORIZONTAL_ALIGNMENT_CENTER, 24, 18, Color.WHITE)
