@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bl351ck6rcwel" path="res://scenes/stations/bowl.tscn" id="5_bowl"]
 [ext_resource type="PackedScene" path="res://scenes/stations/stove.tscn" id="6_stove"]
 [ext_resource type="PackedScene" path="res://scenes/stations/delivery.tscn" id="7_delivery"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_hud.tscn" id="8_game_hud"]
 
 [sub_resource type="RectangleShape2D" id="Shape_top"]
 size = Vector2(1720, 350)
@@ -184,3 +185,5 @@ offset_bottom = 28.0
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_font_sizes/font_size = 14
 text = "J1: WASD + E   |   J2: setas + Enter"
+
+[node name="GameHud" parent="." instance=ExtResource("8_game_hud")]

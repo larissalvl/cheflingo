@@ -28,6 +28,12 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	# Fora de JOGANDO o chef fica parado e não interage com nada.
+	if not GameState.is_playing():
+		velocity = Vector2.ZERO
+		_update_animation()
+		return
+
 	velocity = InputManager.get_move(player_id) * speed
 	move_and_slide()
 	_update_animation()
