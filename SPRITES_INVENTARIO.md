@@ -16,9 +16,9 @@ O que falta: `SPRITES_FALTANDO.md` (prompt para gerar: `PROMPT_CHATGPT_PRATOS.md
 | Caixas | `ingredientes/carne/caixa_beef.png`, `ingredientes/alface/caixa_lettuce.png`, `ingredientes/pao/caixa_bun.png` (as de egg e bacon fazem parte do fundo) |
 | Fogão | `moveis/fogao/fogao_apagado.png`, `moveis/fogao/fogao_aceso.png` |
 | Frigideira | `utensilios/frigideira/frigideira_vazia.png`, `frigideira_beef_cru.png`, `frigideira_beef_cozido.png`, `frigideira_egg_cozido.png`, `frigideira_bacon_cozido.png` |
-| Pratos | `utensilios/prato/prato_vazio.png` + 34 combinações (lista completa em SPRITES_FALTANDO.md, seção "Já existem") |
+| Pratos | `utensilios/prato/prato_vazio.png` + 107 combinações (todas; lista em SPRITES_FALTANDO.md) |
 
-## Pratos com sprite (34 combinações)
+## Pratos com sprite (107 combinações, todas as possíveis)
 
-A tabela completa está em `SPRITES_FALTANDO.md`, seção "Já existem".
+A tabela completa está em `SPRITES_FALTANDO.md`.
 Os 25 pratos de pedido possíveis têm sprite: o sorteio usa todas as combinações (pedido 1: 10 de 2 itens; pedido 2: 10 de 3; pedido 3: 3 ou 4 itens, sem repetir).

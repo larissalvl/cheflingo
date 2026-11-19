@@ -1,6 +1,6 @@
 # Prompt para o ChatGPT: pratos que faltam (PRIORIDADE A)
 
-> **Concluído em 19/11:** os 16 pratos abaixo foram gerados e já estão no jogo. O texto fica aqui de modelo, caso precise gerar mais (por exemplo, da PRIORIDADE B).
+> **Concluído em 19/11:** os 16 pratos abaixo foram gerados e já estão no jogo. Os 73 da PRIORIDADE B também já existem. O texto fica aqui de modelo, caso precise refazer algum.
 
 Como usar:
 1. Abra uma conversa nova no ChatGPT (com geração de imagem).
