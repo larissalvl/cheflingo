@@ -1,5 +1,5 @@
 extends CanvasLayer
-## Relógio no topo da tela e aviso provisório de fim ("VITÓRIA" / "GAME OVER").
+## Relógio no topo da tela (só aparece durante a partida).
 ## Só ouve o GameState; não controla nada.
 
 const WARNING_SECONDS := 15
@@ -10,7 +10,6 @@ var _blink: Tween
 
 @onready var _clock_panel: PanelContainer = $ClockPanel
 @onready var _clock_label: Label = $ClockPanel/ClockLabel
-@onready var _end_label: Label = $EndLabel
 
 
 func _ready() -> void:
@@ -22,15 +21,6 @@ func _ready() -> void:
 
 func _on_state_changed(new_state: GameState.State) -> void:
 	_clock_panel.visible = new_state == GameState.State.JOGANDO
-	match new_state:
-		GameState.State.VITORIA:
-			_end_label.text = "VITÓRIA"
-			_end_label.visible = true
-		GameState.State.GAME_OVER:
-			_end_label.text = "GAME OVER"
-			_end_label.visible = true
-		_:
-			_end_label.visible = false
 
 
 func _on_time_changed(seconds_left: int) -> void:

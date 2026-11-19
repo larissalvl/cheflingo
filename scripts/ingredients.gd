@@ -12,11 +12,11 @@ extends RefCounted
 ##   aí o jogo desenha um placeholder da cor `color` / `cooked_color` com o nome
 ##   do arquivo esperado (`sprite_file` / `cooked_file`) escrito em cima.
 ## - file_id: nome curto usado nos NOMES DE ARQUIVO (ingrediente_<file_id>_cru.png,
-##   frigideira_<file_id>_cozido.png, prato_bun_beef-cozido.png...). Ver RENOMEACAO.md.
+##   frigideira_<file_id>_cozido.png, prato_bun_beef-cozido.png...). Convenção no CLAUDE.md.
 ## - box_sprite: desenho da caixa do ingrediente. "" = a caixa já faz parte do
 ##   fundo (egg e bacon, na ilha) ou ainda não existe.
 ## Quando a arte chegar: coloque o PNG em sprites/ e preencha o caminho aqui
-## (e tire a linha do SPRITES_FALTANDO.md).
+## seguindo a convenção de nomes do CLAUDE.md.
 
 const DATA := {
 	"EGG": {

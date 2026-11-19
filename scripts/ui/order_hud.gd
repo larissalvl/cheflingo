@@ -61,7 +61,10 @@ func _on_delivered_ok() -> void:
 	_showing_check = true
 	_check.visible = true
 	_content.modulate.a = 0.3
-	await get_tree().create_timer(CHECK_SECONDS).timeout
+	get_tree().create_timer(CHECK_SECONDS).timeout.connect(_end_check.bind(gen))
+
+
+func _end_check(gen: int) -> void:
 	if gen == _check_gen:
 		_cancel_check()
 		_refresh()
@@ -79,7 +82,10 @@ func _on_delivered_wrong(missing: Array, extra: Array, uncooked: Array = []) -> 
 	_hint_panel.visible = true
 	_hint_gen += 1
 	var gen := _hint_gen
-	await get_tree().create_timer(HINT_SECONDS).timeout
+	get_tree().create_timer(HINT_SECONDS).timeout.connect(_end_hint.bind(gen))
+
+
+func _end_hint(gen: int) -> void:
 	if gen == _hint_gen:
 		_hide_hint()
 

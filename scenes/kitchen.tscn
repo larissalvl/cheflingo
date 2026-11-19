@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/stations/delivery.tscn" id="7_delivery"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_hud.tscn" id="8_game_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/order_hud.tscn" id="9_order_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/screens.tscn" id="10_screens"]
 
 [sub_resource type="RectangleShape2D" id="Shape_top"]
 size = Vector2(1720, 350)
@@ -185,3 +186,5 @@ text = "J1: WASD + E   |   J2: setas + Enter"
 [node name="GameHud" parent="." unique_id=1538525533 instance=ExtResource("8_game_hud")]
 
 [node name="OrderHud" parent="." unique_id=563197177 instance=ExtResource("9_order_hud")]
+
+[node name="Screens" parent="." unique_id=1402277513 instance=ExtResource("10_screens")]

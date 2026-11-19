@@ -49,9 +49,9 @@ func update_label() -> void:
 ## Mostra um texto por um instante e depois volta ao normal.
 func flash_text(text: String, seconds: float = 0.8) -> void:
 	_label.text = text
-	await get_tree().create_timer(seconds).timeout
-	if is_inside_tree():
-		update_label()
+	# Timer ligado a um método: se a cena for recarregada antes, a ligação some
+	# junto com o nó (com "await" daria erro no console).
+	get_tree().create_timer(seconds).timeout.connect(update_label)
 
 
 ## Feedback de "não aceito": a estação pisca vermelho e o item na mão do chef

@@ -21,6 +21,8 @@ var time_left: float = ROUND_SECONDS
 var final_time_left: float = 0.0
 ## Estrelas ganhas (1 a 3). 0 = ainda não venceu.
 var stars: int = 0
+## "Jogar de novo" pediu para a cozinha nova já começar jogando.
+var _restart_requested := false
 
 
 func _process(delta: float) -> void:
@@ -77,6 +79,35 @@ func reset() -> void:
 	OrderManager.clear()
 	_set_state(State.MENU)
 	time_changed.emit(get_seconds_left())
+
+
+## "Jogar de novo": recarrega a cozinha inteira (chefs, bancadas, fogão, prato,
+## entregas voltam ao estado inicial) e a partida nova começa sozinha.
+## O tempo, os pedidos e as estrelas são zerados em start_game().
+func restart_game() -> void:
+	_restart_requested = true
+	get_tree().reload_current_scene()
+
+
+## "Menu": recarrega a cozinha parada; ao abrir, ela chama reset() e mostra a
+## tela inicial (tempo, pedidos e estrelas zerados).
+func go_to_menu() -> void:
+	_restart_requested = false
+	get_tree().reload_current_scene()
+
+
+## Chamado pela cozinha ao abrir: true se deve começar jogando direto.
+func consume_restart_request() -> bool:
+	var r := _restart_requested
+	_restart_requested = false
+	return r
+
+
+## Pedidos entregues certos na partida (para a tela de game over).
+func orders_delivered() -> int:
+	if state == State.VITORIA:
+		return OrderManager.total_orders()
+	return maxi(OrderManager.current_index - 1, 0)
 
 
 func is_playing() -> bool:

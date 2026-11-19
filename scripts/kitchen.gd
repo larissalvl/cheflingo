@@ -1,17 +1,25 @@
 extends Node2D
 ## Cena da cozinha. Mostra na barra de cima quem controla cada chef
 ## (teclado ou ESP32), para facilitar o teste do hardware.
-## Enquanto a tela inicial não existe, a partida começa assim que a cozinha abre.
+## Ao abrir: mostra a tela inicial (MENU) ou, se veio de "Jogar de novo",
+## já começa a partida. As telas ficam em scenes/ui/screens.tscn.
 
 @onready var _hud: Label = $Hud
 
 func _ready() -> void:
-	InputManager.source_changed.connect(func(_p, _s): _update_hud())
+	InputManager.source_changed.connect(_on_source_changed)
 	_update_hud()
 	# Prepara todos os sprites antes de começar (evita engasgo no meio da partida).
 	Ingredients.preload_all()
 	Plates.preload_all()
-	GameState.start_game()
+	if GameState.consume_restart_request():
+		GameState.start_game()
+	else:
+		GameState.reset()  # tela inicial
+
+
+func _on_source_changed(_player: int, _source: String) -> void:
+	_update_hud()
 
 
 func _update_hud() -> void:
@@ -21,7 +29,7 @@ func _update_hud() -> void:
 
 
 # DEBUG: remover antes da entrega
-# F1 = vitória, F2 = game over, F3 = reinicia a partida,
+# F1 = vitória, F2 = game over, F3 = reinicia a partida (igual a "Jogar de novo"),
 # 7 = fogão: vazia -> cru -> cozido -> vazia, 8 = entrega o pedido certo, 9 = entrega um pedido errado.
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
@@ -32,7 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_F2:
 			GameState.lose()
 		KEY_F3:
-			GameState.start_game()
+			GameState.restart_game()
 		KEY_7, KEY_KP_7:
 			_debug_cycle_stove()
 		KEY_8, KEY_KP_8:
