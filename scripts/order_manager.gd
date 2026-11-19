@@ -2,6 +2,8 @@ extends Node
 ## OrderManager (autoload): sorteia os 3 pedidos da partida e confere as entregas.
 ## As combinações são geradas a partir de Ingredients.ids(), então um ingrediente
 ## novo entra nos sorteios sem mexer neste arquivo.
+## Só entram no sorteio combinações cujo prato pronto (cozinháveis cozidos) tem
+## sprite em Plates.TABLE; as outras são listadas no console no início.
 
 signal order_changed(index: int, items: Array)
 signal order_delivered_ok
@@ -19,6 +21,8 @@ var orders: Array = []
 var current_index: int = 0
 ## Ids do pedido atual.
 var current_items: Array = []
+## Já avisou no console quais combinações ficaram fora do sorteio.
+var _reported_missing := false
 
 
 # ---------------- API pública ----------------
@@ -102,16 +106,46 @@ func _go_to_order(index: int) -> void:
 	order_changed.emit(current_index, current_items.duplicate())
 
 
+## Combinações possíveis de pedido (todos os tamanhos de ORDER_SIZES) que NÃO
+## têm sprite de prato pronto. Elas ficam fora do sorteio.
+func combos_without_sprite() -> Array:
+	var sizes_seen := {}
+	var result: Array = []
+	for sizes in ORDER_SIZES:
+		for size in sizes:
+			if sizes_seen.has(size):
+				continue
+			sizes_seen[size] = true
+			for combo in combinations(Ingredients.ids(), size):
+				if not Plates.has_order_sprite(combo):
+					result.append(combo)
+	return result
+
+
 func _draw_orders() -> Array:
 	var ids := Ingredients.ids()
 	var used := {}
 	var result: Array = []
+	if not _reported_missing:
+		_reported_missing = true
+		var missing := combos_without_sprite()
+		if not missing.is_empty():
+			print("[OrderManager] %d combinações fora do sorteio (sem sprite de prato): %s" % [missing.size(), missing])
 	for sizes in ORDER_SIZES:
 		var pool: Array = []
+		# Sem filtro: só usado se nenhuma combinação tiver sprite (ex.: sprites
+		# ainda não importados pela Godot), para o jogo nunca travar.
+		var any_pool: Array = []
 		for size in sizes:
 			for combo in combinations(ids, size):
-				if not used.has(_key(combo)):
+				if used.has(_key(combo)):
+					continue
+				any_pool.append(combo)
+				if Plates.has_order_sprite(combo):
 					pool.append(combo)
+		if pool.is_empty() and not any_pool.is_empty():
+			push_warning("[OrderManager] nenhuma combinação de %s itens tem sprite de prato; sorteando sem filtro." % [sizes])
+			pool = any_pool
 		if pool.is_empty():
 			push_error("[OrderManager] ingredientes insuficientes para sortear os pedidos.")
 			break

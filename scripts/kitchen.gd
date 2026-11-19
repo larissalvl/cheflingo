@@ -12,6 +12,9 @@ var _debug_stove_step := 0
 func _ready() -> void:
 	InputManager.source_changed.connect(func(_p, _s): _update_hud())
 	_update_hud()
+	# Prepara todos os sprites antes de começar (evita engasgo no meio da partida).
+	Ingredients.preload_all()
+	Plates.preload_all()
 	GameState.start_game()
 
 

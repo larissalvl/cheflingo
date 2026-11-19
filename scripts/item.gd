@@ -18,6 +18,11 @@ const OUTLINE_SIZE := 7
 ## Id do ingrediente (chave de Ingredients.DATA).
 var ingredient: String = "EGG"
 var state: State = State.CRU
+## false = desenha só o nome (usado no fogão quando a frigideira já mostra a comida).
+var show_icon: bool = true:
+	set(value):
+		show_icon = value
+		queue_redraw()
 
 
 static func create(ingredient_name: String) -> Item:
@@ -50,7 +55,8 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	var box := Rect2(Vector2(-ICON_SIZE, -ICON_SIZE) / 2, Vector2(ICON_SIZE, ICON_SIZE))
-	Ingredients.draw_icon(self, ingredient, is_cooked(), box)
+	if show_icon:
+		Ingredients.draw_icon(self, ingredient, is_cooked(), box)
 	draw_label(self, Ingredients.english(ingredient),
 		Vector2(0, ICON_SIZE / 2 + NAME_GAP), NAME_FONT_SIZE)
 

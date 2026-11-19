@@ -19,12 +19,23 @@ Objetivo educativo: aprender vocabulário de inglês associando o desenho (sprit
 Mostra só o pedido atual. Título "Pedido 1", "Pedido 2" ou "Pedido 3". Abaixo, uma linha por ingrediente com o sprite ao lado e o nome em inglês. Sem frase de pedido e sem nome de cliente. Ao entregar certo, aparece um ✔ rápido e troca para o próximo.
 
 ## Ingredientes
-egg, bacon, beef patty, lettuce, mais outros que existirem como sprite em sprites/ (ex.: bread, tomato, cheese).
+5 ingredientes (dados em scripts/ingredients.gd): egg, bacon, beef patty (cozinháveis: cru → cozido no fogão), lettuce e bun (pão de hambúrguer; não cozinham, um estado só). Cada um tem caixa: egg e bacon na ilha (desenhadas no fundo); beef patty, lettuce e bun na bancada da direita (sprites de caixa).
+
+## Pratos por combinação
+- O prato (estação PLATE, na mão do chef, na bancada e no balcão de entrega) mostra o sprite que corresponde EXATAMENTE ao conjunto de itens (id + cru/cozido). Tabela em scripts/plates.gd (inventário em SPRITES_INVENTARIO.md).
+- Sem sprite para a combinação: prato vazio com os ícones dos itens em cima (sem erro).
+- Sempre, ao lado do prato: lista dos itens com ícone + nome em inglês.
+- O visual não muda a validação: entrega certa = ids batem com o pedido E os cozinháveis estão cozidos.
+- O sorteio de pedidos só usa combinações cujo prato pronto (tudo cozido) tem sprite; as outras são listadas no console.
+- Fogão: a frigideira mostra a comida quando existe sprite para item + estado (PAN_SPRITES em stove.gd); senão frigideira vazia + ícone do item.
 
 ## Arte e interface
 - Use os sprites existentes em sprites/. Sem sprite, use placeholder (retângulo colorido com o nome do arquivo esperado) e liste os sprites faltantes com tamanho e formato (PNG com fundo transparente).
 - Interface (relógio, menu, botões, telas) só com nós de UI do Godot (Panel, Label, ColorRect, Button), sem depender de sprites.
 - Não mexer nos arquivos de arte: problemas de nome/duplicados são listados para a Larissa resolver.
+- Sprites em sprites/: ingredientes/<item>/ (ícones cru/cozido e caixas), moveis/fogao/, utensilios/frigideira/, utensilios/prato/, Players/, fundo/. Inventário completo: SPRITES_INVENTARIO.md; o que falta: SPRITES_FALTANDO.md.
+- Alguns PNGs vieram com o xadrez de transparência pintado; Ingredients.cropped() apaga esse xadrez na memória ao carregar (o arquivo não muda). Use sempre Ingredients.cropped() para carregar sprites de itens, pratos, caixas e frigideiras.
+- Problemas atuais da arte: não existe prato vazio (prato_vazio.png é uma frigideira com carne assada); frigideiraCarneAssada.png mostra carne crua e frigideiraCarneCrua.png está vazia. O código usa pelo desenho; se os arquivos forem renomeados, ajustar plates.gd e stove.gd.
 
 ## Organização do código
 Pastas: scenes/, scripts/, sprites/ (arte), firmware/ (código do ESP32), tools/ (scripts auxiliares).

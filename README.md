@@ -21,7 +21,7 @@ A barra no topo da tela mostra quem controla cada chef: `[teclado]` ou `[ESP32]`
 - `scripts/` — código GDScript (`input_manager.gd` é o autoload de controles)
 - `firmware/` — código dos ESP32 (Arduino IDE)
 - `tools/` — scripts auxiliares em Python
-- `assets/` — arte e sons (quando chegarem)
+- `sprites/` — arte (inventário em `SPRITES_INVENTARIO.md`, o que falta em `SPRITES_FALTANDO.md`)
 
 ## Hardware
 Materiais: 2 ESP32, 2 joysticks HW-504, protoboard, jumpers.

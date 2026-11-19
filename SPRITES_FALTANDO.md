@@ -1,36 +1,60 @@
 # Sprites faltando
 
-Enquanto um sprite não existe, o jogo mostra um placeholder: um retângulo colorido com o nome do arquivo esperado escrito em cima.
+Só o que realmente falta (19/11/2026). O inventário completo e a tabela de pratos estão em `SPRITES_INVENTARIO.md`.
 
-**Formato de todos:** PNG com fundo transparente, deixando pouca borda vazia em volta do desenho (o jogo recorta a borda sozinho, mas o arquivo fica mais leve). Use a extensão `.PNG`, igual aos arquivos que já existem.
+**Formato de todos:** PNG com fundo **transparente de verdade** (sem o xadrez cinza/branco pintado na imagem), pouca borda vazia em volta.
+**Tamanho:** 512×512, igual aos sprites novos.
+**Nome:** tudo minúsculo, sem acento e sem espaço.
 
-**Quando um sprite chegar:**
-1. Coloque o arquivo em `sprites/`.
-2. Preencha o caminho em `scripts/ingredients.gd` (campo `sprite` ou `cooked_sprite`). Para as caixas, me avise.
-3. Apague a linha correspondente aqui.
+Enquanto um sprite não existe, o jogo não trava: mostra um placeholder (retângulo colorido com o nome do arquivo esperado) ou, no caso dos pratos, o prato vazio com os ícones dos itens em cima.
 
-## Ingredientes
+**Quando um sprite chegar:** coloque em `sprites/` e me avise (ou adicione a linha em `scripts/plates.gd` / `scripts/ingredients.gd`). Depois apague a linha daqui.
 
-| Arquivo esperado | O que é | Tamanho sugerido |
+## 1. Prioridade alta
+
+| Arquivo esperado | Pasta | O que é |
 |---|---|---|
-| `carneIcone.PNG` | beef patty **cru** (hambúrguer de carne cru) | 512×512 |
-| `carneCozidaIcone.PNG` | beef patty **cozido** | 512×512 |
-| `ovoCozidoIcone.PNG` | egg **cozido** (ovo frito) | 512×512 |
-| `baconCozidoIcone.PNG` | bacon **cozido** | 512×512 |
-| `alfaceIcone.PNG` | lettuce (alface; não vai ao fogão, só tem a versão crua) | 512×512 |
+| `prato_vazio.png` | `utensilios/prato/` | prato vazio (sem nada em cima). O arquivo com esse nome hoje é uma frigideira com carne: renomeie aquele antes (ver inventário, seção 5). |
 
-## Estações
+## 2. Pratos de pedido (tudo cozido): liberam mais variedade no sorteio
 
-| Arquivo esperado | O que é | Tamanho sugerido |
+Hoje só 5 das 25 combinações de pedido têm sprite, e as outras ficam fora do sorteio.
+Cada linha abaixo que chegar entra no sorteio sozinha (depois de adicionada em `plates.gd`).
+Sugestão de ordem: primeiro os de 4 itens com pão (para o pedido 3 ficar mais difícil), depois os de 3 com pão.
+
+| Itens | Arquivo esperado | Conteúdo |
 |---|---|---|
-| `caixaCarne.PNG` | caixa de beef patty (bancada da direita) | 256×256 |
-| `caixaAlface.PNG` | caixa de lettuce (bancada da direita) | 256×256 |
+| 4 | `prato_pao_carne_cozido_bacon_cozido_alface.png` | bun + beef patty + bacon + lettuce |
+| 4 | `prato_pao_carne_cozido_ovo_cozido_alface.png` | bun + beef patty + egg + lettuce (talvez seja o `hamburguer_completo_assado.png`, ver dúvida 5 do inventário) |
+| 4 | `prato_pao_carne_cozido_bacon_cozido_ovo_cozido.png` | bun + beef patty + bacon + egg |
+| 4 | `prato_pao_bacon_cozido_ovo_cozido_alface.png` | bun + bacon + egg + lettuce |
+| 4 | `prato_carne_cozido_bacon_cozido_ovo_cozido_alface.png` | beef patty + bacon + egg + lettuce |
+| 3 | `prato_pao_carne_cozido_bacon_cozido.png` | bun + beef patty + bacon |
+| 3 | `prato_pao_bacon_cozido_ovo_cozido.png` | bun + bacon + egg |
+| 3 | `prato_pao_bacon_cozido_alface.png` | bun + bacon + lettuce |
+| 3 | `prato_pao_ovo_cozido_alface.png` | bun + egg + lettuce |
+| 3 | `prato_carne_cozido_bacon_cozido_ovo_cozido.png` | beef patty + bacon + egg |
+| 3 | `prato_carne_cozido_bacon_cozido_alface.png` | beef patty + bacon + lettuce |
+| 3 | `prato_carne_cozido_ovo_cozido_alface.png` | beef patty + egg + lettuce |
+| 3 | `prato_bacon_cozido_ovo_cozido_alface.png` | bacon + egg + lettuce |
+| 2 | `prato_pao_bacon_cozido.png` | bun + bacon |
+| 2 | `prato_pao_alface.png` | bun + lettuce |
+| 2 | `prato_carne_cozido_bacon_cozido.png` | beef patty + bacon |
+| 2 | `prato_carne_cozido_ovo_cozido.png` | beef patty + egg |
+| 2 | `prato_carne_cozido_alface.png` | beef patty + lettuce |
+| 2 | `prato_bacon_cozido_alface.png` | bacon + lettuce |
+| 2 | `prato_ovo_cozido_alface.png` | egg + lettuce |
 
-## Já existem (não precisa desenhar)
+Os pratos intermediários (com itens crus, ou com menos itens enquanto a criança monta) **não são obrigatórios**: aparecem como prato vazio + ícones. A lista completa das 107 combinações está no inventário (seção 4b), se a colega quiser desenhar mais.
 
-- **Cru:** `ovoIcone.PNG` (egg) e `baconIcone.PNG` (bacon).
-- **Fogão e frigideira:** `fogaoApagado.PNG`, `fogaoAceso.PNG` e `frigideiraVazia.PNG`.
-- **Prato:** `pratoVazio.PNG`.
-- **Existem, mas o jogo ainda não usa:** `frigideiraOvo`, `frigideiraBacon`, `frigideiraOvoBacon`, `pratoOvo`, `pratoOvoeBacon`, `pedidoOvo`, `pedidoBacon`, `pedidoOvoBacon` e `bancada`.
+## 3. Opcional (fogão)
 
-Observação: `baconIcone.PNG` parece bacon já frito. Ele está sendo usado como **cru**. Se a colega desenhar um bacon cru (mais rosado), ele entra no lugar, e o `baconIcone` atual pode virar o cozido.
+| Arquivo esperado | Pasta | O que é |
+|---|---|---|
+| `frigideira_ovo_cru.png` | `utensilios/frigideira/` | frigideira com ovo **cru** (enquanto cozinha). Hoje: frigideira vazia + ícone do ovo. |
+| `frigideira_bacon_cru.png` | `utensilios/frigideira/` | frigideira com bacon **cru**. Hoje: frigideira vazia + ícone do bacon. |
+
+## 4. Exportar de novo (com fundo transparente)
+
+Não faltam, mas vieram com o xadrez pintado. O jogo já limpa na memória; refazer deixa mais seguro.
+Lista completa no inventário, seção 5, item 3.
