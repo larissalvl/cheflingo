@@ -16,29 +16,9 @@ O que falta: `SPRITES_FALTANDO.md` (prompt para gerar: `PROMPT_CHATGPT_PRATOS.md
 | Caixas | `ingredientes/carne/caixa_beef.png`, `ingredientes/alface/caixa_lettuce.png`, `ingredientes/pao/caixa_bun.png` (as de egg e bacon fazem parte do fundo) |
 | Fogão | `moveis/fogao/fogao_apagado.png`, `moveis/fogao/fogao_aceso.png` |
 | Frigideira | `utensilios/frigideira/frigideira_vazia.png`, `frigideira_beef_cru.png`, `frigideira_beef_cozido.png`, `frigideira_egg_cozido.png`, `frigideira_bacon_cozido.png` |
-| Pratos | `utensilios/prato/prato_vazio.png` + 18 combinações (tabela abaixo) |
+| Pratos | `utensilios/prato/prato_vazio.png` + 34 combinações (lista completa em SPRITES_FALTANDO.md, seção "Já existem") |
 
-## Pratos com sprite (18 combinações)
+## Pratos com sprite (34 combinações)
 
-| Arquivo | Itens | Pode sair como pedido? |
-|---|---|---|
-| `prato_bacon-cozido.png` | bacon (cozido) | não |
-| `prato_beef-cozido.png` | beef patty (cozido) | não |
-| `prato_beef-cru.png` | beef patty (cru) | não |
-| `prato_bun.png` | bun | não |
-| `prato_egg-cozido.png` | egg (cozido) | não |
-| `prato_bacon-cozido_egg-cozido.png` | bacon (cozido) + egg (cozido) | sim |
-| `prato_beef-cru_egg-cozido.png` | beef patty (cru) + egg (cozido) | não |
-| `prato_beef-cru_lettuce.png` | beef patty (cru) + lettuce | não |
-| `prato_bun_bacon-cozido.png` | bun + bacon (cozido) | sim |
-| `prato_bun_beef-cozido.png` | bun + beef patty (cozido) | sim |
-| `prato_bun_beef-cru.png` | bun + beef patty (cru) | não |
-| `prato_bun_egg-cozido.png` | bun + egg (cozido) | sim |
-| `prato_bun_bacon-cozido_lettuce.png` | bun + bacon (cozido) + lettuce | sim |
-| `prato_bun_beef-cozido_bacon-cozido.png` | bun + beef patty (cozido) + bacon (cozido) | sim |
-| `prato_bun_beef-cozido_egg-cozido.png` | bun + beef patty (cozido) + egg (cozido) | sim |
-| `prato_bun_beef-cozido_lettuce.png` | bun + beef patty (cozido) + lettuce | sim |
-| `prato_bun_beef-cru_lettuce.png` | bun + beef patty (cru) + lettuce | não |
-| `prato_bun_beef-cozido_lettuce_egg-cozido.png` | bun + beef patty (cozido) + lettuce + egg (cozido) | sim |
-
-Hoje o sorteio tem: pedido 1 entre 4 combinações de 2 itens; pedidos 2 e 3 entre 4 de 3 itens (e o pedido 3 também pode cair na de 4 itens). São 9 pedidos com sprite de 25 possíveis.
+A tabela completa está em `SPRITES_FALTANDO.md`, seção "Já existem".
+Os 25 pratos de pedido possíveis têm sprite: o sorteio usa todas as combinações (pedido 1: 10 de 2 itens; pedido 2: 10 de 3; pedido 3: 3 ou 4 itens, sem repetir).

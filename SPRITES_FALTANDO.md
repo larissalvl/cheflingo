@@ -1,37 +1,16 @@
-# Sprites faltando (19/11/2026)
+# Sprites faltando (19/11/2026, depois dos 16 pratos novos)
 
 Combinações de prato possíveis: itens bun, beef, bacon, lettuce, egg; beef, bacon e egg podem estar crus ou cozidos; de 1 a 5 itens, cada item no máximo 1 vez.
-**Total: 107 combinações. Com sprite: 18. Faltam: 89** (16 de prioridade A + 73 de prioridade B).
+**Total: 107 combinações. Com sprite: 34. Faltam: 73** (0 de prioridade A + 73 de prioridade B).
 
 **Formato:** PNG 512×512 com fundo **transparente de verdade** (sem o xadrez pintado), no estilo dos pratos atuais.
 **Nome:** exatamente o da coluna "Arquivo esperado" (convenção em RENOMEACAO.md). Coloque em `sprites/utensilios/prato/`.
 Não precisa mexer em código: o jogo lê a pasta e o prato novo aparece sozinho; se for de prioridade A, entra no sorteio de pedidos.
 Prompt pronto para o ChatGPT: `PROMPT_CHATGPT_PRATOS.md`.
 
-## PRIORIDADE A: pratos de pedido sem sprite (16)
+## PRIORIDADE A: pratos de pedido sem sprite (0)
 
-Pedido 1 = 2 itens, pedido 2 = 3 itens, pedido 3 = 3 ou 4 itens, sempre com os cozinháveis **cozidos**.
-São 25 pedidos possíveis; 9 têm sprite hoje. Os 16 abaixo estão fora do sorteio até o sprite existir.
-Ordem sugerida: os de 4 itens primeiro (o pedido 3 fica mais variado), depois os de 3 e por último os de 2.
-
-| Itens | Arquivo esperado | Conteúdo (item + estado) |
-|---|---|---|
-| 4 | `prato_beef-cozido_bacon-cozido_lettuce_egg-cozido.png` | beef patty (cozido) + bacon (cozido) + lettuce + egg (cozido) |
-| 4 | `prato_bun_bacon-cozido_lettuce_egg-cozido.png` | bun + bacon (cozido) + lettuce + egg (cozido) |
-| 4 | `prato_bun_beef-cozido_bacon-cozido_egg-cozido.png` | bun + beef patty (cozido) + bacon (cozido) + egg (cozido) |
-| 4 | `prato_bun_beef-cozido_bacon-cozido_lettuce.png` | bun + beef patty (cozido) + bacon (cozido) + lettuce |
-| 3 | `prato_bacon-cozido_lettuce_egg-cozido.png` | bacon (cozido) + lettuce + egg (cozido) |
-| 3 | `prato_beef-cozido_bacon-cozido_egg-cozido.png` | beef patty (cozido) + bacon (cozido) + egg (cozido) |
-| 3 | `prato_beef-cozido_bacon-cozido_lettuce.png` | beef patty (cozido) + bacon (cozido) + lettuce |
-| 3 | `prato_beef-cozido_lettuce_egg-cozido.png` | beef patty (cozido) + lettuce + egg (cozido) |
-| 3 | `prato_bun_bacon-cozido_egg-cozido.png` | bun + bacon (cozido) + egg (cozido) |
-| 3 | `prato_bun_lettuce_egg-cozido.png` | bun + lettuce + egg (cozido) |
-| 2 | `prato_bacon-cozido_lettuce.png` | bacon (cozido) + lettuce |
-| 2 | `prato_beef-cozido_bacon-cozido.png` | beef patty (cozido) + bacon (cozido) |
-| 2 | `prato_beef-cozido_egg-cozido.png` | beef patty (cozido) + egg (cozido) |
-| 2 | `prato_beef-cozido_lettuce.png` | beef patty (cozido) + lettuce |
-| 2 | `prato_bun_lettuce.png` | bun + lettuce |
-| 2 | `prato_lettuce_egg-cozido.png` | lettuce + egg (cozido) |
+**Completa.** Os 25 pratos de pedido possíveis têm sprite (conferidos um por um em 19/11), e todos entram no sorteio.
 
 ## PRIORIDADE B: outras combinações (opcional, 73)
 
@@ -113,7 +92,7 @@ Montagens "erradas" ou intermediárias (com item cru, ou com menos itens enquant
 | 5 | `prato_bun_beef-cru_bacon-cru_lettuce_egg-cozido.png` | bun + beef patty (cru) + bacon (cru) + lettuce + egg (cozido) |
 | 5 | `prato_bun_beef-cru_bacon-cru_lettuce_egg-cru.png` | bun + beef patty (cru) + bacon (cru) + lettuce + egg (cru) |
 
-## Já existem (18)
+## Já existem (34)
 
 | Itens | Arquivo | Conteúdo | Pode sair como pedido? |
 |---|---|---|---|
@@ -123,17 +102,33 @@ Montagens "erradas" ou intermediárias (com item cru, ou com menos itens enquant
 | 1 | `prato_bun.png` | bun | não |
 | 1 | `prato_egg-cozido.png` | egg (cozido) | não |
 | 2 | `prato_bacon-cozido_egg-cozido.png` | bacon (cozido) + egg (cozido) | sim |
+| 2 | `prato_bacon-cozido_lettuce.png` | bacon (cozido) + lettuce | sim |
+| 2 | `prato_beef-cozido_bacon-cozido.png` | beef patty (cozido) + bacon (cozido) | sim |
+| 2 | `prato_beef-cozido_egg-cozido.png` | beef patty (cozido) + egg (cozido) | sim |
+| 2 | `prato_beef-cozido_lettuce.png` | beef patty (cozido) + lettuce | sim |
 | 2 | `prato_beef-cru_egg-cozido.png` | beef patty (cru) + egg (cozido) | não |
 | 2 | `prato_beef-cru_lettuce.png` | beef patty (cru) + lettuce | não |
 | 2 | `prato_bun_bacon-cozido.png` | bun + bacon (cozido) | sim |
 | 2 | `prato_bun_beef-cozido.png` | bun + beef patty (cozido) | sim |
 | 2 | `prato_bun_beef-cru.png` | bun + beef patty (cru) | não |
 | 2 | `prato_bun_egg-cozido.png` | bun + egg (cozido) | sim |
+| 2 | `prato_bun_lettuce.png` | bun + lettuce | sim |
+| 2 | `prato_lettuce_egg-cozido.png` | lettuce + egg (cozido) | sim |
+| 3 | `prato_bacon-cozido_lettuce_egg-cozido.png` | bacon (cozido) + lettuce + egg (cozido) | sim |
+| 3 | `prato_beef-cozido_bacon-cozido_egg-cozido.png` | beef patty (cozido) + bacon (cozido) + egg (cozido) | sim |
+| 3 | `prato_beef-cozido_bacon-cozido_lettuce.png` | beef patty (cozido) + bacon (cozido) + lettuce | sim |
+| 3 | `prato_beef-cozido_lettuce_egg-cozido.png` | beef patty (cozido) + lettuce + egg (cozido) | sim |
+| 3 | `prato_bun_bacon-cozido_egg-cozido.png` | bun + bacon (cozido) + egg (cozido) | sim |
 | 3 | `prato_bun_bacon-cozido_lettuce.png` | bun + bacon (cozido) + lettuce | sim |
 | 3 | `prato_bun_beef-cozido_bacon-cozido.png` | bun + beef patty (cozido) + bacon (cozido) | sim |
 | 3 | `prato_bun_beef-cozido_egg-cozido.png` | bun + beef patty (cozido) + egg (cozido) | sim |
 | 3 | `prato_bun_beef-cozido_lettuce.png` | bun + beef patty (cozido) + lettuce | sim |
 | 3 | `prato_bun_beef-cru_lettuce.png` | bun + beef patty (cru) + lettuce | não |
+| 3 | `prato_bun_lettuce_egg-cozido.png` | bun + lettuce + egg (cozido) | sim |
+| 4 | `prato_beef-cozido_bacon-cozido_lettuce_egg-cozido.png` | beef patty (cozido) + bacon (cozido) + lettuce + egg (cozido) | sim |
+| 4 | `prato_bun_bacon-cozido_lettuce_egg-cozido.png` | bun + bacon (cozido) + lettuce + egg (cozido) | sim |
+| 4 | `prato_bun_beef-cozido_bacon-cozido_egg-cozido.png` | bun + beef patty (cozido) + bacon (cozido) + egg (cozido) | sim |
+| 4 | `prato_bun_beef-cozido_bacon-cozido_lettuce.png` | bun + beef patty (cozido) + bacon (cozido) + lettuce | sim |
 | 4 | `prato_bun_beef-cozido_lettuce_egg-cozido.png` | bun + beef patty (cozido) + lettuce + egg (cozido) | sim |
 
 ## Opcional: fogão

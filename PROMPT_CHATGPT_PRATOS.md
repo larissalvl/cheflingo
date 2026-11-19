@@ -1,5 +1,7 @@
 # Prompt para o ChatGPT: pratos que faltam (PRIORIDADE A)
 
+> **Concluído em 19/11:** os 16 pratos abaixo foram gerados e já estão no jogo. O texto fica aqui de modelo, caso precise gerar mais (por exemplo, da PRIORIDADE B).
+
 Como usar:
 1. Abra uma conversa nova no ChatGPT (com geração de imagem).
 2. Anexe 2 ou 3 pratos atuais como referência de estilo. Sugestão: `sprites/utensilios/prato/prato_bun_beef-cozido_lettuce.png`, `prato_bun_beef-cozido_egg-cozido.png` e `prato_bacon-cozido_egg-cozido.png` (este último mostra o bacon frito).
