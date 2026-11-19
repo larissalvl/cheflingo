@@ -1,18 +1,22 @@
 class_name Stove
 extends Station
 ## Fogão com frigideira (bloco cinza da bancada de cima). Cozinha 1 item por vez.
+## A frigideira fica SEMPRE em cima do fogão, visível.
 ##
-## VAZIO (sem frigideira, apagado)
-##   -> chef com item cozinhável CRU interage: item vai para a frigideira, fogo acende
+## VAZIO (frigideira vazia, fogo apagado)
+##   -> chef com item cozinhável CRU interage: frigideira com o item cru, fogo acende
 ## COZINHANDO (4 s, barra de progresso; ignora interações)
-##   -> item vira COZIDO, fogo apaga
+##   -> item vira COZIDO: frigideira com o item cozido, fogo apaga
 ## PRONTO (selo verde pulsando)
-##   -> chef de mãos vazias interage: pega o item, a frigideira some, volta a VAZIO
+##   -> chef de mãos vazias interage: pega o item, volta a frigideira vazia (VAZIO)
 ##
-## Item não cozinhável (lettuce), já cozido ou prato: pisca vermelho e o item fica na mão.
-## Arte: fogaoApagado/fogaoAceso = fogão SEM frigideira; a frigideira é desenhada por cima.
-## A frigideira mostra a comida quando existe sprite para o item + estado (PAN_SPRITES);
-## senão fica a frigideira vazia com o sprite do ingrediente por cima.
+## Item não cozinhável (lettuce, bun), já cozido ou prato: pisca vermelho e o item fica na mão.
+##
+## Arte: fogao_apagado/fogao_aceso = fogão SEM frigideira; a frigideira é desenhada por cima.
+## A frigideira com comida é achada pelo NOME do arquivo (convenção):
+##   sprites/utensilios/frigideira/frigideira_<file_id>_<cru|cozido>.png
+##   (ex.: frigideira_beef_cru.png). Se não existir, usa a frigideira vazia com o
+##   ícone do ingrediente por cima. Um arquivo novo com esse nome entra sozinho.
 
 enum CookState { VAZIO, COZINHANDO, PRONTO }
 
@@ -25,20 +29,12 @@ const BAR_BG := Color(0.1, 0.05, 0.02, 0.85)
 const BAR_FILL := Color(1.0, 0.6, 0.15)
 const READY_COLOR := Color(0.25, 0.85, 0.3)
 
-const PAN_EMPTY := "res://sprites/utensilios/frigideira/frigideiraVazia.PNG"
-## Frigideira com a comida: id -> {"raw": cru, "cooked": cozido}. Sem entrada = vazia + ícone.
-## ATENÇÃO: escolhidos pelo DESENHO, não pelo nome (os nomes estão trocados, ver
-## SPRITES_INVENTARIO.md). Se a Larissa renomear os arquivos, ajuste aqui.
-const PAN_SPRITES := {
-	"BEEF PATTY": {
-		"raw": "res://sprites/utensilios/frigideira/frigideiraCarneAssada.png",  # desenho: carne CRUA
-		"cooked": "res://sprites/utensilios/prato/prato_vazio.png",  # desenho: carne ASSADA na frigideira
-	},
-	"EGG": {"cooked": "res://sprites/utensilios/frigideira/frigideiraOvo.PNG"},
-	"BACON": {"cooked": "res://sprites/utensilios/frigideira/frigideiraBacon.PNG"},
-}
+const PAN_DIR := "res://sprites/utensilios/frigideira/"
+const PAN_EMPTY := PAN_DIR + "frigideira_vazia.png"
 
-var has_pan := false
+## DEBUG (tecla 7): ingredientes usados no ciclo, um por volta.
+const DEBUG_CYCLE_ITEMS := ["BEEF PATTY", "EGG", "BACON"]
+
 var burner_on := false
 var cook_state: CookState = CookState.VAZIO
 var item: Item = null
@@ -54,6 +50,8 @@ var _indicator: Node2D
 ## para todas as versões aparecerem do mesmo tamanho e no mesmo lugar.
 var _pan_width := 0.0
 var _pan_center := Vector2.ZERO
+## DEBUG: qual ingrediente o próximo ciclo da tecla 7 usa.
+var _debug_item_index := 0
 
 @onready var _stove_off: Sprite2D = $StoveOff
 @onready var _stove_on: Sprite2D = $StoveOn
@@ -67,13 +65,15 @@ func _ready() -> void:
 	_indicator.z_index = 6
 	add_child(_indicator)
 	_indicator.draw.connect(_draw_indicator)
-	for id in PAN_SPRITES:  # prepara os sprites das frigideiras já no início
-		for state in PAN_SPRITES[id]:
-			Ingredients.cropped(PAN_SPRITES[id][state])
+	# Mede a frigideira vazia como ela está na cena (posição e escala ajustadas no editor).
 	var full := _pan.texture.get_size() * _pan.scale
 	var r := Ingredients.cropped_rect(PAN_EMPTY)
 	_pan_width = r.size.x * full.x
 	_pan_center = _pan.position + (r.get_center() - Vector2(0.5, 0.5)) * full
+	# Prepara os sprites das frigideiras já no início (sem engasgo depois).
+	for id in Ingredients.ids():
+		for cooked in [false, true]:
+			Ingredients.cropped(pan_sprite_path(id, cooked))
 	_update_visual()
 
 
@@ -108,24 +108,41 @@ func interact(chef: Chef) -> bool:
 			item = null
 			cooked.show_icon = true
 			chef.hold(cooked)
-			cook_state = CookState.VAZIO
-			set_pan(false)
-			set_burner(false)
-			_indicator.queue_redraw()
+			_back_to_empty()
 			return true
 	return false  # COZINHANDO: ignora
-
-
-## Põe (true) ou tira (false) a frigideira do fogão.
-func set_pan(on: bool) -> void:
-	has_pan = on
-	_update_visual()
 
 
 ## Acende (true) ou apaga (false) o fogo.
 func set_burner(on: bool) -> void:
 	burner_on = on
 	_update_visual()
+
+
+## Caminho do sprite da frigideira com esse ingrediente (pela convenção de nomes),
+## ou "" se o arquivo não existir.
+static func pan_sprite_path(id: String, cooked: bool) -> String:
+	var path := PAN_DIR + "frigideira_%s_%s.png" % [Ingredients.file_id(id), "cozido" if cooked else "cru"]
+	return path if ResourceLoader.exists(path) else ""
+
+
+## DEBUG (tecla 7): frigideira vazia -> com cru -> com cozido -> vazia.
+## Cada volta usa um ingrediente (beef patty, egg, bacon).
+func debug_cycle() -> void:
+	match cook_state:
+		CookState.VAZIO:
+			var id: String = DEBUG_CYCLE_ITEMS[_debug_item_index % DEBUG_CYCLE_ITEMS.size()]
+			_debug_item_index += 1
+			_start_cooking(Item.create(id))
+			print("[DEBUG] fogão: %s CRU" % id)
+		CookState.COZINHANDO:
+			_finish_cooking()
+			print("[DEBUG] fogão: %s COZIDO" % item.ingredient)
+		CookState.PRONTO:
+			item.queue_free()
+			item = null
+			_back_to_empty()
+			print("[DEBUG] fogão: frigideira vazia")
 
 
 # ---------------- interno ----------------
@@ -139,7 +156,6 @@ func _start_cooking(it: Item) -> void:
 	it.position = ITEM_OFFSET
 	_progress = 0.0
 	cook_state = CookState.COZINHANDO
-	set_pan(true)
 	set_burner(true)
 
 
@@ -150,20 +166,24 @@ func _finish_cooking() -> void:
 	_ready_time = 0.0
 
 
+func _back_to_empty() -> void:
+	cook_state = CookState.VAZIO
+	set_burner(false)
+	_indicator.queue_redraw()
+
+
 func _update_visual() -> void:
 	_stove_off.visible = not burner_on
 	_stove_on.visible = burner_on
-	_pan.visible = has_pan
-	if not has_pan:
-		return
-	# Escolhe a frigideira: com a comida (se houver sprite) ou vazia + ícone do item.
+	# A frigideira está sempre lá. Antes ela ficava escondida no fogão livre
+	# (visible = has_pan, e has_pan era false sem comida).
+	_pan.visible = true
 	var path := PAN_EMPTY
 	if item != null:
-		var state := "cooked" if item.is_cooked() else "raw"
-		var food_pan: String = PAN_SPRITES.get(item.ingredient, {}).get(state, "")
+		var food_pan := pan_sprite_path(item.ingredient, item.is_cooked())
 		if food_pan != "" and Ingredients.cropped(food_pan) != null:
 			path = food_pan
-		item.show_icon = path == PAN_EMPTY
+		item.show_icon = path == PAN_EMPTY  # sem sprite próprio: ícone por cima
 	var tex := Ingredients.cropped(path)
 	if tex == null or _pan_width <= 0.0:
 		return  # mantém a textura original da cena

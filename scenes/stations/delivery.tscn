@@ -5,5 +5,6 @@
 
 [node name="Delivery" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
+show_rect = false
 title = "DELIVERY"
 color = Color(0.85, 0.55, 0.15, 1)

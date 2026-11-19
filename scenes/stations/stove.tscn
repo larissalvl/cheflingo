@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" path="res://scenes/stations/station.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://b1u8rwchyqucr" path="res://scripts/stations/stove.gd" id="2_script"]
-[ext_resource type="Texture2D" uid="uid://pxr2fjp1ylq" path="res://sprites/moveis/fogao/fogaoApagado.PNG" id="3_off"]
-[ext_resource type="Texture2D" uid="uid://bjq1nolw3i4f1" path="res://sprites/moveis/fogao/fogaoAceso.PNG" id="4_on"]
-[ext_resource type="Texture2D" uid="uid://bh44yb8cigi40" path="res://sprites/utensilios/frigideira/frigideiraVazia.PNG" id="5_pan"]
+[ext_resource type="Texture2D" uid="uid://pxr2fjp1ylq" path="res://sprites/moveis/fogao/fogao_apagado.png" id="3_off"]
+[ext_resource type="Texture2D" uid="uid://bjq1nolw3i4f1" path="res://sprites/moveis/fogao/fogao_aceso.png" id="4_on"]
+[ext_resource type="Texture2D" uid="uid://bh44yb8cigi40" path="res://sprites/utensilios/frigideira/frigideira_vazia.png" id="5_pan"]
 
 [sub_resource type="RectangleShape2D" id="Shape_stove_body"]
 size = Vector2(76, 116)
@@ -45,7 +45,6 @@ scale = Vector2(0.0929, 0.1275)
 texture = ExtResource("4_on")
 
 [node name="Pan" type="Sprite2D" parent="."]
-visible = false
 show_behind_parent = true
 position = Vector2(-1, -26)
 scale = Vector2(0.056, 0.056)

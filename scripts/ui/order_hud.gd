@@ -106,7 +106,9 @@ func _make_row(id: String) -> HBoxContainer:
 	var icon := Control.new()
 	icon.custom_minimum_size = ICON_SIZE
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	icon.draw.connect(func(): Ingredients.draw_icon(icon, id, false, Rect2(Vector2.ZERO, icon.size)))
+	# Cozinháveis aparecem COZIDOS: é assim que o pedido tem que ser entregue.
+	var cooked := Ingredients.is_cookable(id)
+	icon.draw.connect(func(): Ingredients.draw_icon(icon, id, cooked, Rect2(Vector2.ZERO, icon.size)))
 	row.add_child(icon)
 
 	var label := Label.new()

@@ -3,7 +3,8 @@ extends Node
 ## As combinações são geradas a partir de Ingredients.ids(), então um ingrediente
 ## novo entra nos sorteios sem mexer neste arquivo.
 ## Só entram no sorteio combinações cujo prato pronto (cozinháveis cozidos) tem
-## sprite em Plates.TABLE; as outras são listadas no console no início.
+## sprite na pasta de pratos (Plates lê a pasta pelo nome dos arquivos); as
+## outras são listadas no console no início. Sprite novo = entra no sorteio sozinho.
 
 signal order_changed(index: int, items: Array)
 signal order_delivered_ok
@@ -130,7 +131,13 @@ func _draw_orders() -> Array:
 		_reported_missing = true
 		var missing := combos_without_sprite()
 		if not missing.is_empty():
-			print("[OrderManager] %d combinações fora do sorteio (sem sprite de prato): %s" % [missing.size(), missing])
+			var files: Array[String] = []
+			for combo in missing:
+				var items := {}
+				for id in combo:
+					items[id] = Ingredients.is_cookable(id)
+				files.append(Plates.file_name_for(items))
+			print("[OrderManager] %d pedidos possíveis fora do sorteio (falta o sprite): %s" % [missing.size(), ", ".join(files)])
 	for sizes in ORDER_SIZES:
 		var pool: Array = []
 		# Sem filtro: só usado se nenhuma combinação tiver sprite (ex.: sprites

@@ -12,6 +12,8 @@ const HIGHLIGHT_COLOR := Color(1.0, 0.85, 0.1)
 @export var color: Color = Color(0.55, 0.4, 0.28)
 ## Tamanho do contorno amarelo (estações maiores, como o fogão, aumentam).
 @export var highlight_size: Vector2 = SIZE
+## false = esconde o retângulo colorido (a arte do fundo já mostra a bancada).
+@export var show_rect: bool = true
 
 ## Chefs que estão com esta estação como "a mais próxima".
 var _highlighted_by: Array[Node] = []
@@ -23,6 +25,8 @@ var _highlighted_by: Array[Node] = []
 
 func _ready() -> void:
 	_visual.color = color
+	if not show_rect:
+		_visual.visible = false
 	$InteractArea.body_entered.connect(_on_body_entered)
 	$InteractArea.body_exited.connect(_on_body_exited)
 	update_label()

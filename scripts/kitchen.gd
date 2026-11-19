@@ -5,10 +5,6 @@ extends Node2D
 
 @onready var _hud: Label = $Hud
 
-# DEBUG: remover antes da entrega
-var _debug_stove_step := 0
-
-
 func _ready() -> void:
 	InputManager.source_changed.connect(func(_p, _s): _update_hud())
 	_update_hud()
@@ -26,7 +22,7 @@ func _update_hud() -> void:
 
 # DEBUG: remover antes da entrega
 # F1 = vitória, F2 = game over, F3 = reinicia a partida,
-# 7 = percorre os visuais do fogão, 8 = entrega o pedido certo, 9 = entrega um pedido errado.
+# 7 = fogão: vazia -> cru -> cozido -> vazia, 8 = entrega o pedido certo, 9 = entrega um pedido errado.
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
@@ -46,13 +42,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # DEBUG: remover antes da entrega
-# Fogão: sem frigideira -> com frigideira -> com frigideira e aceso -> volta ao início.
+# Fogão: frigideira vazia -> com cru -> com cozido -> vazia (cada volta um ingrediente).
 func _debug_cycle_stove() -> void:
 	var stove: Stove = $Stations/Stove
-	_debug_stove_step = (_debug_stove_step + 1) % 3
-	stove.set_pan(_debug_stove_step >= 1)
-	stove.set_burner(_debug_stove_step == 2)
-	print("[DEBUG] fogão: frigideira=%s aceso=%s" % [stove.has_pan, stove.burner_on])
+	stove.debug_cycle()
 
 
 # DEBUG: remover antes da entrega

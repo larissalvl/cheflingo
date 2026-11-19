@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpc52sbpdoeau" path="res://scripts/kitchen.gd" id="1_kitchen"]
 [ext_resource type="PackedScene" uid="uid://daar8jtovocv8" path="res://scenes/chef.tscn" id="2_chef"]
-[ext_resource type="Texture2D" uid="uid://cbdntvutc5rxu" path="res://sprites/fundo/fundo.PNG" id="2_ibrlr"]
+[ext_resource type="Texture2D" uid="uid://cbdntvutc5rxu" path="res://sprites/fundo/fundo_cozinha.png" id="2_ibrlr"]
 [ext_resource type="PackedScene" path="res://scenes/stations/counter.tscn" id="3_counter"]
 [ext_resource type="PackedScene" uid="uid://c1mby23mrlhfv" path="res://scenes/stations/ingredient_box.tscn" id="4_box"]
 [ext_resource type="PackedScene" path="res://scenes/stations/plate.tscn" id="5_plate"]
@@ -74,11 +74,15 @@ shape = SubResource("Shape_island")
 
 [node name="BoxEgg" parent="Stations" unique_id=378801126 instance=ExtResource("4_box")]
 position = Vector2(680, 589)
+reach_size = Vector2(112, 230)
+reach_offset = Vector2(0, 75)
 placeholder_sprite = ""
 
 [node name="BoxBacon" parent="Stations" unique_id=728831861 instance=ExtResource("4_box")]
 position = Vector2(828, 590)
 ingredient = "BACON"
+reach_size = Vector2(112, 230)
+reach_offset = Vector2(0, 75)
 placeholder_sprite = ""
 
 [node name="BoxBeefPatty" parent="Stations" unique_id=2115833158 instance=ExtResource("4_box")]

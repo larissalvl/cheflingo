@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://daar8jtovocv8"]
 
 [ext_resource type="Script" uid="uid://dspqskdga4ivy" path="res://scripts/chef.gd" id="1_chef"]
-[ext_resource type="Texture2D" uid="uid://e11uaeau73vy" path="res://sprites/Players/raposa/raposaIdle.PNG" id="2_d56cy"]
-[ext_resource type="Texture2D" uid="uid://cs45r2de7whna" path="res://sprites/Players/esquilo/esquiloParado.PNG" id="2_psvbk"]
-[ext_resource type="Texture2D" uid="uid://dmntoiiwjfi63" path="res://sprites/Players/esquilo/esquiloAndando2.PNG" id="3_2a8di"]
-[ext_resource type="Texture2D" uid="uid://dwrdtvhq41v8g" path="res://sprites/Players/raposa/raposaAndar1.PNG" id="3_4ri07"]
-[ext_resource type="Texture2D" uid="uid://d1vkx7ubp3p3h" path="res://sprites/Players/raposa/raposaAndar2.PNG" id="4_oqmwt"]
-[ext_resource type="Texture2D" uid="uid://dp0a8c173gegf" path="res://sprites/Players/esquilo/esquiloAndando1.PNG" id="4_stm2u"]
+[ext_resource type="Texture2D" uid="uid://e11uaeau73vy" path="res://sprites/Players/raposa/chef_raposa_parado.png" id="2_d56cy"]
+[ext_resource type="Texture2D" uid="uid://cs45r2de7whna" path="res://sprites/Players/esquilo/chef_esquilo_parado.png" id="2_psvbk"]
+[ext_resource type="Texture2D" uid="uid://dmntoiiwjfi63" path="res://sprites/Players/esquilo/chef_esquilo_andando_2.png" id="3_2a8di"]
+[ext_resource type="Texture2D" uid="uid://dwrdtvhq41v8g" path="res://sprites/Players/raposa/chef_raposa_andando_1.png" id="3_4ri07"]
+[ext_resource type="Texture2D" uid="uid://d1vkx7ubp3p3h" path="res://sprites/Players/raposa/chef_raposa_andando_2.png" id="4_oqmwt"]
+[ext_resource type="Texture2D" uid="uid://dp0a8c173gegf" path="res://sprites/Players/esquilo/chef_esquilo_andando_1.png" id="4_stm2u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1slas"]
 animations = [{

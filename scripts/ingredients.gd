@@ -11,6 +11,8 @@ extends RefCounted
 ## - sprite / cooked_sprite: caminho do PNG cru / cozido. "" = ainda não existe;
 ##   aí o jogo desenha um placeholder da cor `color` / `cooked_color` com o nome
 ##   do arquivo esperado (`sprite_file` / `cooked_file`) escrito em cima.
+## - file_id: nome curto usado nos NOMES DE ARQUIVO (ingrediente_<file_id>_cru.png,
+##   frigideira_<file_id>_cozido.png, prato_bun_beef-cozido.png...). Ver RENOMEACAO.md.
 ## - box_sprite: desenho da caixa do ingrediente. "" = a caixa já faz parte do
 ##   fundo (egg e bacon, na ilha) ou ainda não existe.
 ## Quando a arte chegar: coloque o PNG em sprites/ e preencha o caminho aqui
@@ -18,58 +20,63 @@ extends RefCounted
 
 const DATA := {
 	"EGG": {
+		"file_id": "egg",
 		"en": "egg",
 		"pt": "ovo",
 		"cookable": true,
-		"sprite": "res://sprites/ingredientes/ovo/ovoIcone.PNG",
-		"sprite_file": "ovoIcone.PNG",
+		"sprite": "res://sprites/ingredientes/ovo/ingrediente_egg_cru.png",
+		"sprite_file": "ingrediente_egg_cru.png",
 		"color": Color(0.97, 0.95, 0.9),
-		"cooked_sprite": "res://sprites/ingredientes/ovo/ovoCozidoIcone.PNG",
-		"cooked_file": "ovoCozidoIcone.PNG",
+		"cooked_sprite": "res://sprites/ingredientes/ovo/ingrediente_egg_cozido.png",
+		"cooked_file": "ingrediente_egg_cozido.png",
 		"cooked_color": Color(1.0, 0.85, 0.3),
 		"box_sprite": "",
 	},
 	"BACON": {
+		"file_id": "bacon",
 		"en": "bacon",
 		"pt": "bacon",
 		"cookable": true,
-		"sprite": "res://sprites/ingredientes/bacon/baconCruIcone.PNG",
-		"sprite_file": "baconCruIcone.PNG",
+		"sprite": "res://sprites/ingredientes/bacon/ingrediente_bacon_cru.png",
+		"sprite_file": "ingrediente_bacon_cru.png",
 		"color": Color(0.95, 0.55, 0.55),
-		"cooked_sprite": "res://sprites/ingredientes/bacon/baconIcone.PNG",
-		"cooked_file": "baconIcone.PNG",
+		"cooked_sprite": "res://sprites/ingredientes/bacon/ingrediente_bacon_cozido.png",
+		"cooked_file": "ingrediente_bacon_cozido.png",
 		"cooked_color": Color(0.7, 0.3, 0.2),
 		"box_sprite": "",
 	},
 	"BEEF PATTY": {
+		"file_id": "beef",
 		"en": "beef patty",
 		"pt": "hambúrguer de carne",
 		"cookable": true,
-		"sprite": "res://sprites/ingredientes/carne/carneIcone.PNG",
-		"sprite_file": "carneIcone.PNG",
+		"sprite": "res://sprites/ingredientes/carne/ingrediente_beef_cru.png",
+		"sprite_file": "ingrediente_beef_cru.png",
 		"color": Color(0.85, 0.4, 0.45),
-		"cooked_sprite": "res://sprites/ingredientes/carne/carneCozidaIcone.PNG",
-		"cooked_file": "carneCozidaIcone.PNG",
+		"cooked_sprite": "res://sprites/ingredientes/carne/ingrediente_beef_cozido.png",
+		"cooked_file": "ingrediente_beef_cozido.png",
 		"cooked_color": Color(0.45, 0.27, 0.15),
-		"box_sprite": "res://sprites/ingredientes/carne/caixaCarne.PNG",
+		"box_sprite": "res://sprites/ingredientes/carne/caixa_beef.png",
 	},
 	"LETTUCE": {
+		"file_id": "lettuce",
 		"en": "lettuce",
 		"pt": "alface",
 		"cookable": false,
-		"sprite": "res://sprites/ingredientes/alface/alfaceIcone.PNG",
-		"sprite_file": "alfaceIcone.PNG",
+		"sprite": "res://sprites/ingredientes/alface/ingrediente_lettuce.png",
+		"sprite_file": "ingrediente_lettuce.png",
 		"color": Color(0.45, 0.8, 0.35),
-		"box_sprite": "res://sprites/ingredientes/alface/caixaAlface.PNG",
+		"box_sprite": "res://sprites/ingredientes/alface/caixa_lettuce.png",
 	},
 	"BUN": {
+		"file_id": "bun",
 		"en": "bun",
 		"pt": "pão",
 		"cookable": false,
-		"sprite": "res://sprites/ingredientes/pao/paoHamburguer.png",
-		"sprite_file": "paoHamburguer.png",
+		"sprite": "res://sprites/ingredientes/pao/ingrediente_bun.png",
+		"sprite_file": "ingrediente_bun.png",
 		"color": Color(0.93, 0.68, 0.35),
-		"box_sprite": "res://sprites/ingredientes/pao/caixaPaoHamburguer.png",
+		"box_sprite": "res://sprites/ingredientes/pao/caixa_bun.png",
 	},
 }
 
@@ -89,6 +96,18 @@ static var _crop_rect_cache := {}
 ## Lista de ids na ordem acima.
 static func ids() -> Array:
 	return DATA.keys()
+
+
+## Id do jogo a partir do nome curto dos arquivos ("beef" -> "BEEF PATTY"). "" se não existir.
+static func id_from_file(short_name: String) -> String:
+	for id in DATA:
+		if DATA[id]["file_id"] == short_name:
+			return id
+	return ""
+
+
+static func file_id(id: String) -> String:
+	return DATA[id]["file_id"] if DATA.has(id) else id.to_lower()
 
 
 static func english(id: String) -> String:
@@ -205,7 +224,7 @@ static func draw_placeholder(canvas: CanvasItem, rect: Rect2, fill: Color, file_
 	canvas.draw_rect(rect, PLACEHOLDER_OUTLINE, false, 2.0)
 	var font := ThemeDB.fallback_font
 	# Quebra o nome em duas linhas na última letra maiúscula ou "_"
-	# ("ovoCozidoIcone.PNG" -> "ovoCozido" / "Icone.PNG") e diminui a fonte até caber.
+	# ("ingrediente_egg_cozido.png" -> "ingrediente_egg" / "_cozido.png") e diminui a fonte até caber.
 	var base := file_name.get_basename()
 	var cut := -1
 	for i in range(base.length() - 1, 0, -1):
