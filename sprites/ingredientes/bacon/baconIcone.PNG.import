@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbdntvutc5rxu"
-path="res://.godot/imported/fundo.PNG-6ba700f272e90cc107a6eb7e7bd28162.ctex"
+uid="uid://wa2ud6tn8dh"
+path="res://.godot/imported/baconIcone.PNG-9791d25eaa6ff543d29d634a404ef6d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/fundo.PNG"
-dest_files=["res://.godot/imported/fundo.PNG-6ba700f272e90cc107a6eb7e7bd28162.ctex"]
+source_file="res://sprites/ingredientes/bacon/baconIcone.PNG"
+dest_files=["res://.godot/imported/baconIcone.PNG-9791d25eaa6ff543d29d634a404ef6d7.ctex"]
 
 [params]
 

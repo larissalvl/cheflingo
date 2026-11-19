@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pxr2fjp1ylq"
-path="res://.godot/imported/fogaoApagado.PNG-370a627b9438b2fd3c8b070c35f74f57.ctex"
+uid="uid://enyj0km0ejhv"
+path="res://.godot/imported/ovoIcone.PNG-0565e8ebe5bc08b98a3b91e9f53e7a0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/fogaoApagado.PNG"
-dest_files=["res://.godot/imported/fogaoApagado.PNG-370a627b9438b2fd3c8b070c35f74f57.ctex"]
+source_file="res://sprites/ingredientes/ovo/ovoIcone.PNG"
+dest_files=["res://.godot/imported/ovoIcone.PNG-0565e8ebe5bc08b98a3b91e9f53e7a0f.ctex"]
 
 [params]
 

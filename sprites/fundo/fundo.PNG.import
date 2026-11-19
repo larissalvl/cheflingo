@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuuvakbtf8g7a"
-path="res://.godot/imported/pedidoOvo.PNG-0d5319cfe943e3d9535c4755ca27abb3.ctex"
+uid="uid://cbdntvutc5rxu"
+path="res://.godot/imported/fundo.PNG-bd491dc02a4e3369cec5e9ad964a0ae9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pedidoOvo.PNG"
-dest_files=["res://.godot/imported/pedidoOvo.PNG-0d5319cfe943e3d9535c4755ca27abb3.ctex"]
+source_file="res://sprites/fundo/fundo.PNG"
+dest_files=["res://.godot/imported/fundo.PNG-bd491dc02a4e3369cec5e9ad964a0ae9.ctex"]
 
 [params]
 

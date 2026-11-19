@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh44yb8cigi40"
-path="res://.godot/imported/frigideiraVazia.PNG-6ac161081a3a49c9114bd8e8defd3cea.ctex"
+uid="uid://0s6etp0l0uav"
+path="res://.godot/imported/pratoVazio.PNG-44137eb4c41d10c3e53a0fc7ae5d3529.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/frigideiraVazia.PNG"
-dest_files=["res://.godot/imported/frigideiraVazia.PNG-6ac161081a3a49c9114bd8e8defd3cea.ctex"]
+source_file="res://sprites/utensilios/prato/pratoVazio.PNG"
+dest_files=["res://.godot/imported/pratoVazio.PNG-44137eb4c41d10c3e53a0fc7ae5d3529.ctex"]
 
 [params]
 

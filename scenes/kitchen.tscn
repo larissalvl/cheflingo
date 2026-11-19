@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpc52sbpdoeau" path="res://scripts/kitchen.gd" id="1_kitchen"]
 [ext_resource type="PackedScene" uid="uid://daar8jtovocv8" path="res://scenes/chef.tscn" id="2_chef"]
-[ext_resource type="Texture2D" uid="uid://cbdntvutc5rxu" path="res://sprites/fundo.PNG" id="2_ibrlr"]
+[ext_resource type="Texture2D" uid="uid://cbdntvutc5rxu" path="res://sprites/fundo/fundo.PNG" id="2_ibrlr"]
 [ext_resource type="PackedScene" path="res://scenes/stations/counter.tscn" id="3_counter"]
 [ext_resource type="PackedScene" uid="uid://c1mby23mrlhfv" path="res://scenes/stations/ingredient_box.tscn" id="4_box"]
 [ext_resource type="PackedScene" path="res://scenes/stations/plate.tscn" id="5_plate"]
@@ -32,9 +32,6 @@ size = Vector2(1720, 150)
 [sub_resource type="RectangleShape2D" id="Shape_island"]
 size = Vector2(545, 280)
 
-[sub_resource type="RectangleShape2D" id="Shape_island_reach"]
-size = Vector2(112, 230)
-
 [node name="Kitchen" type="Node2D" unique_id=676126183]
 script = ExtResource("1_kitchen")
 
@@ -45,31 +42,31 @@ centered = false
 [node name="Walls" type="StaticBody2D" parent="." unique_id=688315561]
 collision_mask = 0
 
-[node name="TopCounterShape" type="CollisionShape2D" parent="Walls"]
+[node name="TopCounterShape" type="CollisionShape2D" parent="Walls" unique_id=546248262]
 position = Vector2(835, 135)
 shape = SubResource("Shape_top")
 
-[node name="RightCounterFridgeShape" type="CollisionShape2D" parent="Walls"]
+[node name="RightCounterFridgeShape" type="CollisionShape2D" parent="Walls" unique_id=1061987546]
 position = Vector2(1625, 415)
 shape = SubResource("Shape_right")
 
-[node name="LeftCounterShape" type="CollisionShape2D" parent="Walls"]
+[node name="LeftCounterShape" type="CollisionShape2D" parent="Walls" unique_id=1815727403]
 position = Vector2(75, 225)
 shape = SubResource("Shape_left_upper")
 
-[node name="SinkShape" type="CollisionShape2D" parent="Walls"]
+[node name="SinkShape" type="CollisionShape2D" parent="Walls" unique_id=10292146]
 position = Vector2(60, 625)
 shape = SubResource("Shape_left_sink")
 
-[node name="TrashShape" type="CollisionShape2D" parent="Walls"]
+[node name="TrashShape" type="CollisionShape2D" parent="Walls" unique_id=527689195]
 position = Vector2(40, 890)
 shape = SubResource("Shape_trash")
 
-[node name="BottomCounterShape" type="CollisionShape2D" parent="Walls"]
+[node name="BottomCounterShape" type="CollisionShape2D" parent="Walls" unique_id=1508882131]
 position = Vector2(835, 905)
 shape = SubResource("Shape_bottom")
 
-[node name="IslandShape" type="CollisionShape2D" parent="Walls"]
+[node name="IslandShape" type="CollisionShape2D" parent="Walls" unique_id=570209622]
 position = Vector2(837.5, 610)
 shape = SubResource("Shape_island")
 
@@ -77,32 +74,20 @@ shape = SubResource("Shape_island")
 
 [node name="BoxEgg" parent="Stations" unique_id=378801126 instance=ExtResource("4_box")]
 position = Vector2(680, 589)
+placeholder_sprite = ""
 
-[node name="Visual" parent="Stations/BoxEgg" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="Stations/BoxEgg/InteractArea" index="0"]
-position = Vector2(0, 75)
-shape = SubResource("Shape_island_reach")
-
-[node name="BoxBacon" parent="Stations" instance=ExtResource("4_box")]
+[node name="BoxBacon" parent="Stations" unique_id=728831861 instance=ExtResource("4_box")]
 position = Vector2(828, 590)
 ingredient = "BACON"
+placeholder_sprite = ""
 
-[node name="Visual" parent="Stations/BoxBacon" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="Stations/BoxBacon/InteractArea" index="0"]
-position = Vector2(0, 75)
-shape = SubResource("Shape_island_reach")
-
-[node name="BoxBeefPatty" parent="Stations" instance=ExtResource("4_box")]
+[node name="BoxBeefPatty" parent="Stations" unique_id=2115833158 instance=ExtResource("4_box")]
 position = Vector2(1565, 445)
 ingredient = "BEEF PATTY"
 placeholder_sprite = "caixaCarne.PNG"
 color = Color(0.5, 0.3, 0.18, 1)
 
-[node name="BoxLettuce" parent="Stations" instance=ExtResource("4_box")]
+[node name="BoxLettuce" parent="Stations" unique_id=551000182 instance=ExtResource("4_box")]
 position = Vector2(1565, 550)
 ingredient = "LETTUCE"
 placeholder_sprite = "caixaAlface.PNG"
@@ -158,10 +143,10 @@ scale = Vector2(1.2, 1.2)
 position = Vector2(1447, 271)
 scale = Vector2(1.2, 1.2)
 
-[node name="Plate" parent="Stations" instance=ExtResource("5_plate")]
+[node name="Plate" parent="Stations" unique_id=1114467817 instance=ExtResource("5_plate")]
 position = Vector2(1040, 868)
 
-[node name="Stove" parent="Stations" instance=ExtResource("6_stove")]
+[node name="Stove" parent="Stations" unique_id=1109202587 instance=ExtResource("6_stove")]
 position = Vector2(465, 293)
 
 [node name="Delivery" parent="Stations" unique_id=623529962 instance=ExtResource("7_delivery")]
@@ -187,6 +172,6 @@ theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_font_sizes/font_size = 14
 text = "J1: WASD + E   |   J2: setas + Enter"
 
-[node name="GameHud" parent="." instance=ExtResource("8_game_hud")]
+[node name="GameHud" parent="." unique_id=1538525533 instance=ExtResource("8_game_hud")]
 
-[node name="OrderHud" parent="." instance=ExtResource("9_order_hud")]
+[node name="OrderHud" parent="." unique_id=563197177 instance=ExtResource("9_order_hud")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crdhou6f1wa0n"
-path="res://.godot/imported/pedidoOvoBacon.PNG-086583d3f2b7ac5a35e5d4d671a56eef.ctex"
+uid="uid://naauwg5alxwc"
+path="res://.godot/imported/frigideiraBacon.PNG-2490238e33efc99dac355ba0066e3c0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pedidoOvoBacon.PNG"
-dest_files=["res://.godot/imported/pedidoOvoBacon.PNG-086583d3f2b7ac5a35e5d4d671a56eef.ctex"]
+source_file="res://sprites/utensilios/frigideira/frigideiraBacon.PNG"
+dest_files=["res://.godot/imported/frigideiraBacon.PNG-2490238e33efc99dac355ba0066e3c0f.ctex"]
 
 [params]
 

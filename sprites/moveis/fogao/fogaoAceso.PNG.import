@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://domt5ug4xjua5"
-path="res://.godot/imported/frigideiraOvo.PNG-fe31662a531a87d88e93c42b5f10c997.ctex"
+uid="uid://bjq1nolw3i4f1"
+path="res://.godot/imported/fogaoAceso.PNG-196b218aa93ecfb9f31ca57e5eed2473.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/frigideiraOvo.PNG"
-dest_files=["res://.godot/imported/frigideiraOvo.PNG-fe31662a531a87d88e93c42b5f10c997.ctex"]
+source_file="res://sprites/moveis/fogao/fogaoAceso.PNG"
+dest_files=["res://.godot/imported/fogaoAceso.PNG-196b218aa93ecfb9f31ca57e5eed2473.ctex"]
 
 [params]
 
