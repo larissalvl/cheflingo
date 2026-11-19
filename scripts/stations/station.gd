@@ -1,6 +1,6 @@
 class_name Station
 extends StaticBody2D
-## Base de todas as estações (caixa, bancada, tigela, forno, entrega).
+## Base de todas as estações (caixa, bancada, fogão, prato, entrega).
 ## - O StaticBody2D bloqueia os chefs.
 ## - A InteractArea (Area2D) avisa o chef quando ele chega perto.
 ## - Cada tipo de estação sobrescreve interact() e get_label_text().
@@ -48,6 +48,18 @@ func flash_text(text: String, seconds: float = 0.8) -> void:
 	await get_tree().create_timer(seconds).timeout
 	if is_inside_tree():
 		update_label()
+
+
+## Feedback de "não aceito": a estação pisca vermelho e o item na mão do chef
+## treme (o item continua na mão).
+func reject(chef: Chef) -> void:
+	modulate = Color(1.0, 0.45, 0.45)
+	create_tween().tween_property(self, "modulate", Color.WHITE, 0.35)
+	if chef != null and chef.held_item != null:
+		var it := chef.held_item
+		var shake := it.create_tween()
+		for dx in [9.0, -9.0, 6.0, -6.0, 0.0]:
+			shake.tween_property(it, "position:x", dx, 0.04)
 
 
 func set_highlight(chef: Node, on: bool) -> void:

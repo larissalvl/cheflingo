@@ -5,7 +5,8 @@ extends Node
 
 signal order_changed(index: int, items: Array)
 signal order_delivered_ok
-signal order_delivered_wrong(missing: Array, extra: Array)
+## uncooked = itens do pedido que chegaram crus (precisavam passar pelo fogão).
+signal order_delivered_wrong(missing: Array, extra: Array, uncooked: Array)
 signal all_orders_done
 
 ## Quantos itens cada pedido pode ter (dificuldade crescente).
@@ -41,8 +42,9 @@ func total_orders() -> int:
 
 
 ## Confere um prato (lista de ids, em qualquer ordem) com o pedido atual.
-## Retorna true se estava certo.
-func submit_dish(dish: Array) -> bool:
+## `raw_ids` = ids do prato que são cozinháveis mas estão CRUS.
+## Certo só se os ids batem E nenhum item do pedido está cru. Retorna true se certo.
+func submit_dish(dish: Array, raw_ids: Array = []) -> bool:
 	if not GameState.is_playing() or current_index == 0:
 		return false
 
@@ -56,8 +58,13 @@ func submit_dish(dish: Array) -> bool:
 		else:
 			missing.append(id)
 	var extra := leftover
+	# Crus que fazem parte do pedido (um cru que já "sobrou" aparece só como sobra).
+	var uncooked: Array = []
+	for id in raw_ids:
+		if id in current_items and id not in extra and id not in uncooked:
+			uncooked.append(id)
 
-	if missing.is_empty() and extra.is_empty():
+	if missing.is_empty() and extra.is_empty() and uncooked.is_empty():
 		print("[OrderManager] pedido %d CERTO" % current_index)
 		order_delivered_ok.emit()
 		if current_index >= orders.size():
@@ -67,8 +74,8 @@ func submit_dish(dish: Array) -> bool:
 			_go_to_order(current_index + 1)
 		return true
 
-	print("[OrderManager] pedido %d ERRADO. faltou=%s sobrou=%s" % [current_index, missing, extra])
-	order_delivered_wrong.emit(missing, extra)
+	print("[OrderManager] pedido %d ERRADO. faltou=%s sobrou=%s cru=%s" % [current_index, missing, extra, uncooked])
+	order_delivered_wrong.emit(missing, extra, uncooked)
 	return false
 
 

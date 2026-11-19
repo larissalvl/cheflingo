@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cbdntvutc5rxu" path="res://sprites/fundo.PNG" id="2_ibrlr"]
 [ext_resource type="PackedScene" path="res://scenes/stations/counter.tscn" id="3_counter"]
 [ext_resource type="PackedScene" uid="uid://c1mby23mrlhfv" path="res://scenes/stations/ingredient_box.tscn" id="4_box"]
-[ext_resource type="PackedScene" uid="uid://bl351ck6rcwel" path="res://scenes/stations/bowl.tscn" id="5_bowl"]
+[ext_resource type="PackedScene" path="res://scenes/stations/plate.tscn" id="5_plate"]
 [ext_resource type="PackedScene" path="res://scenes/stations/stove.tscn" id="6_stove"]
 [ext_resource type="PackedScene" path="res://scenes/stations/delivery.tscn" id="7_delivery"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_hud.tscn" id="8_game_hud"]
@@ -99,13 +99,13 @@ shape = SubResource("Shape_island_reach")
 [node name="BoxBeefPatty" parent="Stations" instance=ExtResource("4_box")]
 position = Vector2(1565, 445)
 ingredient = "BEEF PATTY"
-placeholder_sprite = "carneIcone.PNG"
+placeholder_sprite = "caixaCarne.PNG"
 color = Color(0.5, 0.3, 0.18, 1)
 
 [node name="BoxLettuce" parent="Stations" instance=ExtResource("4_box")]
 position = Vector2(1565, 550)
 ingredient = "LETTUCE"
-placeholder_sprite = "alfaceIcone.PNG"
+placeholder_sprite = "caixaAlface.PNG"
 color = Color(0.35, 0.65, 0.3, 1)
 
 [node name="CounterTop1" parent="Stations" unique_id=413877966 instance=ExtResource("3_counter")]
@@ -158,8 +158,8 @@ scale = Vector2(1.2, 1.2)
 position = Vector2(1447, 271)
 scale = Vector2(1.2, 1.2)
 
-[node name="Bowl" parent="Stations" unique_id=1829539285 instance=ExtResource("5_bowl")]
-position = Vector2(999, 490)
+[node name="Plate" parent="Stations" instance=ExtResource("5_plate")]
+position = Vector2(1040, 868)
 
 [node name="Stove" parent="Stations" instance=ExtResource("6_stove")]
 position = Vector2(465, 293)

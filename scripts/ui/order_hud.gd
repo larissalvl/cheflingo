@@ -67,12 +67,14 @@ func _on_delivered_ok() -> void:
 		_refresh()
 
 
-func _on_delivered_wrong(missing: Array, extra: Array) -> void:
+func _on_delivered_wrong(missing: Array, extra: Array, uncooked: Array = []) -> void:
 	var lines: Array[String] = []
 	if not missing.is_empty():
 		lines.append("Faltou: " + _translate_list(missing))
 	if not extra.is_empty():
 		lines.append("Sobrou: " + _translate_list(extra))
+	for id in uncooked:
+		lines.append("O %s precisa ser cozido" % Ingredients.english(id))
 	_hint_label.text = "\n".join(lines)
 	_hint_panel.visible = true
 	_hint_gen += 1
@@ -96,24 +98,16 @@ func _refresh() -> void:
 		_rows.add_child(_make_row(id))
 
 
-## Uma linha: ícone (sprite ou retângulo colorido) + nome em inglês.
+## Uma linha: ícone (sprite ou placeholder) + nome em inglês.
 func _make_row(id: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 12)
 
-	var tex := Ingredients.icon(id)
-	if tex != null:
-		var icon := TextureRect.new()
-		icon.texture = tex
-		icon.custom_minimum_size = ICON_SIZE
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		row.add_child(icon)
-	else:
-		var placeholder := ColorRect.new()
-		placeholder.color = Ingredients.color(id)
-		placeholder.custom_minimum_size = ICON_SIZE
-		row.add_child(placeholder)
+	var icon := Control.new()
+	icon.custom_minimum_size = ICON_SIZE
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	icon.draw.connect(func(): Ingredients.draw_icon(icon, id, false, Rect2(Vector2.ZERO, icon.size)))
+	row.add_child(icon)
 
 	var label := Label.new()
 	label.text = Ingredients.english(id)

@@ -1,10 +1,12 @@
 class_name Item
 extends Node2D
-## Um ingrediente que pode ser carregado pelo chef ou ficar numa bancada.
-## Mostra o sprite (ou um retângulo colorido, se ainda não houver arte) e,
-## logo abaixo, o nome em inglês — para a criança associar desenho e palavra.
-## Sprite, cor e nome vêm de Ingredients (scripts/ingredients.gd).
+## Um ingrediente que pode estar na mão do chef, numa bancada ou no fogão.
+## Tem um id (`ingredient`, ex.: "EGG") e um estado: CRU ou COZIDO.
+## Mostra o sprite do estado atual (ou o placeholder) e, logo abaixo, o nome em
+## inglês — o nome é o mesmo cru ou cozido. Dados vêm de Ingredients.
 ## O tamanho na tela é sempre o mesmo, não importa a escala de quem segura.
+
+enum State { CRU, COZIDO }
 
 const ICON_SIZE := 56.0
 const NAME_FONT_SIZE := 22
@@ -13,9 +15,9 @@ const NAME_COLOR := Color(1.0, 0.97, 0.9)
 const OUTLINE_COLOR := Color(0.1, 0.05, 0.0)
 const OUTLINE_SIZE := 7
 
+## Id do ingrediente (chave de Ingredients.DATA).
 var ingredient: String = "EGG"
-
-var _texture: Texture2D = null
+var state: State = State.CRU
 
 
 static func create(ingredient_name: String) -> Item:
@@ -25,9 +27,18 @@ static func create(ingredient_name: String) -> Item:
 	return item
 
 
+func is_cooked() -> bool:
+	return state == State.COZIDO
+
+
+## Muda para COZIDO (true) ou CRU (false) e troca o sprite.
+func set_cooked(cooked: bool) -> void:
+	state = State.COZIDO if cooked else State.CRU
+	queue_redraw()
+
+
 func _ready() -> void:
 	z_index = 5  # sempre por cima de chefs e estações
-	_texture = Ingredients.icon(ingredient)
 	queue_redraw()
 
 
@@ -38,21 +49,17 @@ func _process(_delta: float) -> void:
 
 
 func _draw() -> void:
-	# Ícone centralizado na origem do item.
 	var box := Rect2(Vector2(-ICON_SIZE, -ICON_SIZE) / 2, Vector2(ICON_SIZE, ICON_SIZE))
-	if _texture != null:
-		var tex_size := _texture.get_size()
-		var k := minf(ICON_SIZE / tex_size.x, ICON_SIZE / tex_size.y)
-		var draw_size := tex_size * k
-		draw_texture_rect(_texture, Rect2(-draw_size / 2, draw_size), false)
-	else:
-		draw_rect(box, Ingredients.color(ingredient))
-		draw_rect(box, OUTLINE_COLOR, false, 2.0)
+	Ingredients.draw_icon(self, ingredient, is_cooked(), box)
+	draw_label(self, Ingredients.english(ingredient),
+		Vector2(0, ICON_SIZE / 2 + NAME_GAP), NAME_FONT_SIZE)
 
-	# Nome em inglês logo abaixo do ícone.
+
+## Escreve `text` centralizado, com contorno, começando (topo) em `top_center`.
+static func draw_label(canvas: CanvasItem, text: String, top_center: Vector2, font_size: int) -> void:
 	var font := ThemeDB.fallback_font
-	var text := Ingredients.english(ingredient)
-	var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, NAME_FONT_SIZE)
-	var pos := Vector2(-text_size.x / 2, ICON_SIZE / 2 + NAME_GAP + font.get_ascent(NAME_FONT_SIZE))
-	draw_string_outline(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, NAME_FONT_SIZE, OUTLINE_SIZE, OUTLINE_COLOR)
-	draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, NAME_FONT_SIZE, NAME_COLOR)
+	var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+	var pos := Vector2(top_center.x - w / 2, top_center.y + font.get_ascent(font_size))
+	var outline := maxi(4, int(font_size * 0.32))
+	canvas.draw_string_outline(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, outline, OUTLINE_COLOR)
+	canvas.draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, NAME_COLOR)
