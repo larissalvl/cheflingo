@@ -6,9 +6,9 @@
 
 ## O que falta (em ordem de prioridade)
 - [x] Telas: inicial ("Jogar"), vitória com estrelas e game over ("Jogar de novo" e "Menu"), navegáveis por teclado e joystick/SW, com foco visível. "Jogar de novo" recarrega a cozinha do zero.
-- [ ] **Joysticks pelo cabo USB, 1 ESP32 com os 2 joysticks (marco atrasado, depende de hardware):**
+- [x] **Joysticks pelo cabo USB, 1 ESP32 com os 2 joysticks:**
   - [x] firmware `firmware/joysticks/joysticks.ino` (compila) e ponte `tools/serial_to_udp.py` + `tools/iniciar_joysticks.bat` (testada com ESP32 simulado: J1, J2, botão, reconexão)
-  - [ ] montar o J2 no mesmo ESP32, gravar o firmware novo e testar os dois chefs juntos pelo cabo
+  - [x] montar o J2 no mesmo ESP32, gravar o firmware novo e testar os dois chefs juntos pelo cabo
 - [ ] Teste com os 2 joysticks reais: zona morta, latência, chef andando sozinho quando o joystick está tocado no boot (agora dá para recalibrar segurando o botão 2 s).
 - [ ] Antes da entrega:
   - [ ] remover as teclas de debug (7, 8, 9, F1–F3) em `scripts/kitchen.gd`
@@ -56,7 +56,7 @@ Trabalho da faculdade (Integração com ESP32, Unifor) da Larissa (programação
 - PC: `tools/serial_to_udp.py` (pyserial) acha a porta do ESP32, repassa as linhas válidas por UDP para 127.0.0.1:4210 e reconecta se o cabo sair. `tools/iniciar_joysticks.bat` roda o script. O Serial Monitor da Arduino IDE precisa estar fechado (a porta só aceita um programa).
 - Um único autoload `InputManager` (escuta UDP 4210) esconde se o comando vem do teclado ou do ESP32; o resto do jogo NUNCA sabe a diferença. Sem pacote por 0,5 s → volta para o teclado. Teclado sempre funciona como reserva: J1 = WASD + E; J2 = setas + Enter.
 - Legado (não usado): `firmware/j1/` (1 joystick por Wi-Fi/UDP) e `firmware/joystick_serial/` (teste do D1). `tools/fake_joystick.py` simula um ESP32 por UDP para testar sem hardware.
-- Lições: joystick tocado no boot → calibração errada e chef andando sozinho (recalibrar com o botão 2 s ou reiniciar o ESP32 com os joysticks soltos). Abrir a porta serial reinicia o ESP32 (ele recalibra).
+- Lições: joystick tocado no boot → calibração errada e chef andando sozinho (recalibrar com o botão 2 s ou reiniciar o ESP32 com os joysticks soltos). Abrir a porta serial reinicia o ESP32 (ele recalibra). J2 oscilando de -1 a 1 (ou travado em 4095 = nan) era o trilho da protoboard cortado no meio: ligar 3V3/GND dos dois joysticks na mesma metade do trilho ou fazer ponte com jumper.
 - Avisar ANTES de qualquer risco de hardware (cabo só de carga, driver USB, mau contato, ruído) e já trazer o plano B (teclado).
 
 ## Como trabalhar
