@@ -3,7 +3,7 @@ extends Station
 ## Estação do prato (montagem). Sempre tem um prato (Dish) em cima.
 ## - Chef com ingrediente: o ingrediente vai para o prato. Aceita qualquer um
 ##   (a criança pode errar e aprender), mas não o mesmo ingrediente duas vezes.
-## - Chef de mãos vazias + prato com itens: leva o prato inteiro; um prato
+## - Chef de mãos vazias: leva o prato (vazio ou com itens); um prato
 ##   vazio novo aparece na estação.
 ## - Chef com um prato vazio na mão: devolve o prato à pilha.
 
@@ -33,8 +33,6 @@ func interact(chef: Chef) -> bool:
 		dish.add(chef.take_item())
 		return true
 
-	if dish.is_empty():
-		return false
 	var full := dish
 	dish = null
 	chef.hold(full)

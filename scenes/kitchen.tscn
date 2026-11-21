@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/game_hud.tscn" id="8_game_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/order_hud.tscn" id="9_order_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/screens.tscn" id="10_screens"]
+[ext_resource type="PackedScene" path="res://scenes/stations/trash.tscn" id="11_trash"]
 
 [sub_resource type="RectangleShape2D" id="Shape_top"]
 size = Vector2(1720, 350)
@@ -169,6 +170,9 @@ position = Vector2(1257, 868)
 
 [node name="Delivery2" parent="Stations" unique_id=339448660 instance=ExtResource("7_delivery")]
 position = Vector2(416, 866)
+
+[node name="Trash" parent="Stations" unique_id=1904417736 instance=ExtResource("11_trash")]
+position = Vector2(79, 847)
 
 [node name="Chef1" parent="." unique_id=2007395880 instance=ExtResource("2_chef")]
 position = Vector2(384, 528)
