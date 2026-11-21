@@ -17,8 +17,14 @@ extends Station
 ##   sprites/utensilios/frigideira/frigideira_<file_id>_<cru|cozido>.png
 ##   (ex.: frigideira_beef_cru.png). Se não existir, usa a frigideira vazia com o
 ##   ícone do ingrediente por cima. Um arquivo novo com esse nome entra sozinho.
+##
+## Pode haver vários fogões na cozinha (instâncias desta cena): cada um tem seu
+## próprio estado e frigideira. Todos entram no grupo GROUP; para achar os fogões,
+## use get_tree().get_nodes_in_group(Stove.GROUP), nunca um caminho fixo.
 
 enum CookState { VAZIO, COZINHANDO, PRONTO }
+
+const GROUP := "stoves"
 
 const COOK_SECONDS := 4.0
 ## Onde o item fica (relativo ao ItemSlot): em cima da frigideira.
@@ -60,6 +66,7 @@ var _debug_item_index := 0
 
 func _ready() -> void:
 	super()
+	add_to_group(GROUP)
 	_indicator = Node2D.new()
 	_indicator.name = "Indicator"
 	_indicator.z_index = 6

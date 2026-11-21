@@ -30,7 +30,7 @@ func _update_hud() -> void:
 
 # DEBUG: remover antes da entrega
 # F1 = vitória, F2 = game over, F3 = reinicia a partida (igual a "Jogar de novo"),
-# 7 = fogão: vazia -> cru -> cozido -> vazia, 8 = entrega o pedido certo, 9 = entrega um pedido errado.
+# 7 = fogões: vazia -> cru -> cozido -> vazia, 8 = entrega o pedido certo, 9 = entrega um pedido errado.
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
@@ -50,10 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # DEBUG: remover antes da entrega
-# Fogão: frigideira vazia -> com cru -> com cozido -> vazia (cada volta um ingrediente).
+# Fogões: frigideira vazia -> com cru -> com cozido -> vazia (cada volta um ingrediente).
+# Avança todos os fogões da cozinha (grupo Stove.GROUP).
 func _debug_cycle_stove() -> void:
-	var stove: Stove = $Stations/Stove
-	stove.debug_cycle()
+	for stove in get_tree().get_nodes_in_group(Stove.GROUP):
+		(stove as Stove).debug_cycle()
 
 
 # DEBUG: remover antes da entrega

@@ -116,7 +116,8 @@ scale = Vector2(1.3, 1.3)
 position = Vector2(388, 269)
 
 [node name="CounterTop4" parent="Stations" unique_id=445580709 instance=ExtResource("3_counter")]
-position = Vector2(537, 267)
+position = Vector2(1357, 268)
+scale = Vector2(1.2, 1.2)
 
 [node name="CounterTop5" parent="Stations" unique_id=1420469434 instance=ExtResource("3_counter")]
 position = Vector2(618, 267)
@@ -159,6 +160,9 @@ position = Vector2(1040, 868)
 
 [node name="Stove" parent="Stations" unique_id=1109202587 instance=ExtResource("6_stove")]
 position = Vector2(465, 293)
+
+[node name="Stove2" parent="Stations" unique_id=1742093318 instance=ExtResource("6_stove")]
+position = Vector2(538, 293)
 
 [node name="Delivery" parent="Stations" unique_id=623529962 instance=ExtResource("7_delivery")]
 position = Vector2(1257, 868)

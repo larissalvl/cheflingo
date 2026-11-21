@@ -35,6 +35,7 @@ Trabalho da faculdade (Integração com ESP32, Unifor) da Larissa (programação
 ## Ingredientes, pratos e fogão
 - 5 ingredientes em `scripts/ingredients.gd`: egg, bacon, beef patty (cru → cozido), lettuce, bun. Caixas de egg e bacon fazem parte do fundo (na ilha, com alcance `reach_size`/`reach_offset` para baixo); beef patty, lettuce e bun têm sprite de caixa na bancada da direita.
 - Pratos: `scripts/plates.gd` lê `sprites/utensilios/prato/` e entende cada arquivo pelo nome. As 107 combinações têm sprite. Ao lado do prato fica a lista dos itens (ícone + nome em inglês). O visual não muda a validação (ids iguais ao pedido E cozinháveis cozidos). O sorteio só usa pedidos com sprite.
+- 2 fogões (`Stove` em x=465 e `Stove2` em x=538, lado a lado na bancada de cima; a CounterTop4 foi para o x=1357, no lugar do quadrado do fundo), instâncias da mesma `stove.tscn`, cada um com estado próprio. Achar fogões pelo grupo `Stove.GROUP` ("stoves"), nunca por caminho fixo.
 - Fogão: frigideira sempre visível; vazia → com item cru (fogo aceso, 4 s, barra) → com item cozido (fogo apagado, selo verde) → vazia ao pegar. Usa `frigideira_<id>_<estado>.png` se existir; senão, frigideira vazia + ícone.
 
 ## Arte e interface
