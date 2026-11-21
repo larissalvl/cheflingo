@@ -1,4 +1,4 @@
-# COZINHA MALUCA (Godot 4.7.2, GDScript)
+# CHEFLINGO (Godot 4.7.2, GDScript)
 
 - **Entrega: sex 27/11/2026** (data oficial ainda a confirmar).
 - **Feature freeze: seg 23/11 (D8), fim do dia.** MVP completo; depois disso, nada novo, só correção.
@@ -30,7 +30,7 @@ Trabalho da faculdade (Integração com ESP32, Unifor) da Larissa (programação
 - Vitória: 3 pedidos certos antes do relógio zerar; 1 a 3 estrelas pelo tempo restante (3 com 45 s ou mais, 2 com 20 s ou mais). Game over: relógio chega a 0.
 - Entrega errada: dica em português por alguns segundos, o pedido continua. A dica NUNCA aparece antes do erro.
 - Menu de pedidos (canto superior esquerdo): só o pedido atual, "Pedido N", uma linha por ingrediente com ícone (cozinháveis aparecem cozidos) e nome em inglês; ✔ rápido ao entregar certo.
-- Telas (`scenes/ui/screens.tscn`): início → jogo → vitória/game over → "Jogar de novo" (`GameState.restart_game()`, recarrega a cena) ou "Menu" (`GameState.go_to_menu()`).
+- Telas (`scenes/ui/screens.tscn`): início ("Jogar" e "Instruções"; Instruções tem abas Teclado/Joystick, objetivo do jogo e Voltar/Esc) → jogo → vitória/game over → "Jogar de novo" (`GameState.restart_game()`, recarrega a cena) ou "Menu" (`GameState.go_to_menu()`).
 
 ## Ingredientes, pratos e fogão
 - 5 ingredientes em `scripts/ingredients.gd`: egg, bacon, beef patty (cru → cozido), lettuce, bun. Caixas de egg e bacon fazem parte do fundo (na ilha, com alcance `reach_size`/`reach_offset` para baixo); beef patty, lettuce e bun têm sprite de caixa na bancada da direita.

@@ -1,4 +1,4 @@
-// Cozinha Maluca — Firmware do J1 (Dia 2)
+// Cheflingo — Firmware do J1 (Dia 2)
 // Lê o joystick HW-504, calibra o centro no boot e envia "J1,x,y,sw" por UDP a 50 Hz.
 // Baseado no sketch testado no D1 (firmware/joystick_serial), mesmos pinos.
 //
@@ -140,7 +140,7 @@ void setup() {
   Serial.begin(115200);
   delay(300);
   Serial.println();
-  Serial.printf("# Cozinha Maluca - firmware %s (%s)\n", PLAYER_ID, SERIAL_ONLY ? "MODO SO-SERIAL" : "MODO WI-FI/UDP");
+  Serial.printf("# Cheflingo - firmware %s (%s)\n", PLAYER_ID, SERIAL_ONLY ? "MODO SO-SERIAL" : "MODO WI-FI/UDP");
 
   pinMode(PIN_SW, INPUT_PULLUP);
   analogReadResolution(12);

@@ -1,4 +1,4 @@
-// Cozinha Maluca — Firmware de 1 ESP32 com os 2 joysticks (J1 e J2), pelo cabo USB.
+// Cheflingo — Firmware de 1 ESP32 com os 2 joysticks (J1 e J2), pelo cabo USB.
 //
 // Lê os dois joysticks HW-504, calibra o centro de cada um no boot e imprime no
 // Serial (USB), 50 vezes por segundo, uma linha por jogador:
@@ -199,7 +199,7 @@ void setup() {
     analogSetPinAttenuation(PINS[p][1], ADC_11db);
     pinMode(PINS[p][2], INPUT_PULLUP);
   }
-  Serial.println("# Cozinha Maluca - firmware 1 ESP32 / 2 joysticks (USB Serial)");
+  Serial.println("# Cheflingo - firmware 1 ESP32 / 2 joysticks (USB Serial)");
   if (DEBUG_RAW) Serial.println("# DEBUG_RAW ligado: linhas '# RAW' com o valor bruto (0 a 4095).");
   calibrateAll();
 }

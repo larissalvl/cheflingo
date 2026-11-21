@@ -123,7 +123,7 @@ def choose_ports(args: list) -> list:
 
 
 def main() -> None:
-    print(f"Cozinha Maluca - ponte USB -> jogo (UDP {UDP_HOST}:{UDP_PORT}). Ctrl+C para sair.")
+    print(f"Cheflingo - ponte USB -> jogo (UDP {UDP_HOST}:{UDP_PORT}). Ctrl+C para sair.")
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     stats = Stats()
     stop = threading.Event()

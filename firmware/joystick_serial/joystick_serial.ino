@@ -1,4 +1,4 @@
-// Cozinha Maluca — Dia 1: ler 1 joystick HW-504 no ESP32 e mostrar no Serial.
+// Cheflingo — Dia 1: ler 1 joystick HW-504 no ESP32 e mostrar no Serial.
 // Saída já no formato do jogo: J1,x,y,sw   (x,y de -1 a 1; sw=1 apertado)
 //
 // Ligações (HW-504 -> ESP32):

@@ -1,4 +1,4 @@
-# Cozinha Maluca
+# Cheflingo
 
 Jogo educativo cooperativo (2 jogadores) para crianças de 8 a 10 anos, feito na Godot 4.7.2.
 Cada jogador controla um chef com um joystick. Os dois joysticks ficam ligados a **um ESP32**, que manda os comandos para o PC pelo **cabo USB**.
