@@ -38,9 +38,6 @@ const READY_COLOR := Color(0.25, 0.85, 0.3)
 const PAN_DIR := "res://sprites/utensilios/frigideira/"
 const PAN_EMPTY := PAN_DIR + "frigideira_vazia.png"
 
-## DEBUG (tecla 7): ingredientes usados no ciclo, um por volta.
-const DEBUG_CYCLE_ITEMS := ["BEEF PATTY", "EGG", "BACON"]
-
 var burner_on := false
 var cook_state: CookState = CookState.VAZIO
 var item: Item = null
@@ -56,8 +53,6 @@ var _indicator: Node2D
 ## para todas as versões aparecerem do mesmo tamanho e no mesmo lugar.
 var _pan_width := 0.0
 var _pan_center := Vector2.ZERO
-## DEBUG: qual ingrediente o próximo ciclo da tecla 7 usa.
-var _debug_item_index := 0
 
 @onready var _stove_off: Sprite2D = $StoveOff
 @onready var _stove_on: Sprite2D = $StoveOn
@@ -131,25 +126,6 @@ func set_burner(on: bool) -> void:
 static func pan_sprite_path(id: String, cooked: bool) -> String:
 	var path := PAN_DIR + "frigideira_%s_%s.png" % [Ingredients.file_id(id), "cozido" if cooked else "cru"]
 	return path if ResourceLoader.exists(path) else ""
-
-
-## DEBUG (tecla 7): frigideira vazia -> com cru -> com cozido -> vazia.
-## Cada volta usa um ingrediente (beef patty, egg, bacon).
-func debug_cycle() -> void:
-	match cook_state:
-		CookState.VAZIO:
-			var id: String = DEBUG_CYCLE_ITEMS[_debug_item_index % DEBUG_CYCLE_ITEMS.size()]
-			_debug_item_index += 1
-			_start_cooking(Item.create(id))
-			print("[DEBUG] fogão: %s CRU" % id)
-		CookState.COZINHANDO:
-			_finish_cooking()
-			print("[DEBUG] fogão: %s COZIDO" % item.ingredient)
-		CookState.PRONTO:
-			item.queue_free()
-			item = null
-			_back_to_empty()
-			print("[DEBUG] fogão: frigideira vazia")
 
 
 # ---------------- interno ----------------

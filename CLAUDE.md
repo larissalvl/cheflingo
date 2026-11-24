@@ -9,14 +9,14 @@
 - [x] **Joysticks pelo cabo USB, 1 ESP32 com os 2 joysticks:**
   - [x] firmware `firmware/joysticks/joysticks.ino` (compila) e ponte `tools/serial_to_udp.py` + `tools/iniciar_joysticks.bat` (testada com ESP32 simulado: J1, J2, botão, reconexão)
   - [x] montar o J2 no mesmo ESP32, gravar o firmware novo e testar os dois chefs juntos pelo cabo
-- [ ] Teste com os 2 joysticks reais: zona morta, latência, chef andando sozinho quando o joystick está tocado no boot (agora dá para recalibrar segurando o botão 2 s).
+- [x] Teste com os 2 joysticks reais: zona morta, latência, chef andando sozinho quando o joystick está tocado no boot (agora dá para recalibrar segurando o botão 2 s).
 - [ ] Antes da entrega:
-  - [ ] remover as teclas de debug (7, 8, 9, F1–F3) em `scripts/kitchen.gd`
-  - [ ] balancear o tempo (90 s para 3 pedidos)
+  - [x] remover as teclas de debug (7, 8, 9, F1–F3) em `scripts/kitchen.gd` e `debug_cycle()` em `stove.gd`
+  - [x] balancear o tempo (90 s para 3 pedidos)
   - [ ] exportar a build
   - [ ] atualizar o README
-  - [ ] roteiro da apresentação
-- [ ] Teste com pessoas (ideal: criança de 8 a 10 anos) e teste no PC/local da apresentação (Python + `pip install pyserial`, driver USB do ESP32, cabo de dados, porta USB livre).
+  - [x] roteiro da apresentação (rascunho no Claude Docs)
+- [x] Teste com pessoas e teste no PC da apresentação (a apresentação será no notebook da Larissa).
 
 ## Contexto
 Trabalho da faculdade (Integração com ESP32, Unifor) da Larissa (programação) e uma colega (arte). Público: crianças de 8 a 10 anos. Objetivo educativo: aprender vocabulário de inglês associando o desenho ao nome do ingrediente. Sem matemática, sem quiz entediante.
