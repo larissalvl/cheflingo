@@ -11,7 +11,7 @@ enum State { MENU, JOGANDO, VITORIA, GAME_OVER }
 
 const ROUND_SECONDS := 90.0
 ## Estrelas pelo tempo restante na vitória: 3 com 45 s ou mais, 2 com 20 s ou mais, senão 1.
-const THREE_STARS_SECONDS := 45.0
+const THREE_STARS_SECONDS := 34.0
 const TWO_STARS_SECONDS := 20.0
 
 var state: State = State.MENU

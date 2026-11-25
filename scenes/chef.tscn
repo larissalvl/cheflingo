@@ -14,7 +14,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_psvbk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"esquilo_idle",
 "speed": 5.0
 }, {
@@ -25,7 +25,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_2a8di")
 }],
-"loop": true,
+"loop": 1,
 "name": &"esquilo_walk",
 "speed": 6.0
 }, {
@@ -33,7 +33,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_d56cy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"raposa_idle",
 "speed": 5.0
 }, {
@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_oqmwt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"raposa_walk",
 "speed": 6.0
 }]
